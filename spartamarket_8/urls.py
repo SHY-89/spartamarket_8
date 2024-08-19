@@ -20,10 +20,12 @@ from django.urls import path, include
 from products import views
 from django.conf import settings
 from django.conf.urls.static import static
+from products import views
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("index/", views.index, name="index"),
     path("accounts/", include("accounts.urls")),
     path("products/", include("products.urls")),
 ]
