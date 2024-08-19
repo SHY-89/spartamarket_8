@@ -2,9 +2,15 @@
 ## spartamarket Project
 
 ### 프로젝트 소개
--
+- 온라인상의 중고마켓(결제 기능 X)
 
-### 프로젝트 기능
+### 팀 소개
+- Djaon 에서 따온 8조 냉Django
+- 팀장: 서영환
+- 서기: 이새예
+- 팀원: 김나희, 김나현(A)
+
+### 프로젝트 주요기능
 
 - 회원 기능
   - 회원가입
@@ -43,6 +49,15 @@
   - 상세 페이지
     - 찜 하기
 
+### 개발 기간
+-24.08.19~24.08.27
+
 ### 프로젝트 개발 환경
--
+- Python    3.12.4
+- Django    4.2
+- pillow    10.4.0
+- windows   10
+- Visual Studio Code
+
+### ERD
 ![image](https://github.com/user-attachments/assets/73d45cb5-77ff-4804-9790-d24e9bee82de)
