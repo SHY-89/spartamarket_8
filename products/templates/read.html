@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% comment %} 물건 디테일 조회하기 페이지 {% endcomment %}
+
+{% block content %}
+{{ product.title }}<br>
+{{ product.content }}<br>
+{{ product.created_at|date:"y.m.d" }}
+<br>
+<a class="btn" href="{% url 'index' %}">목록으로</a>
+<a class="btn" href="{% url 'products:update' product.pk %}">수정하기</a>
+
+<form action="{% url 'products:delete' product.pk %}" method= "POST">
+    {% csrf_token %}
+    <button type="submit">삭제</button>
+</form>
+
+
+
+{% endblock content %}
+

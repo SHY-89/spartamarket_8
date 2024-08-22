@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% comment %} 물건 등록하기 페이지  {% endcomment %}
+
+
+{% block content %}
+<div style="text-align: center;"><br>
+    <h1>내 물건 팔기</h1>
+    <br>
+    
+    <form action="{% url 'products:create' %}" method= "POST">
+        {% csrf_token %}
+        {{ forms.as_p}}
+    
+        <a class="btn" href="{% url 'index' %}">목록 으로</a>
+        <button type="submit">작성 완료</button>
+    </form>
+    
+</div>
+
+
+{% endblock content %}
