@@ -97,43 +97,48 @@
 
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #560c7b !important;">
-        <div class="container-fluid">
-            {% comment %} <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button> {% endcomment %}
-            <div class="auth-links">
-                {% if request.user.is_authenticated %}
-                <img src="{{ request.user.profile_picture.url }}" alt="프로필 사진" width=50 height=50 >
+        <div class="container container-fluid" style="font-size: 18px;color: #fff;padding: 8px 0;align-items: center;justify-content: center;">
+            <div class="auth-links">지금 가입하고, <b>가지</b> 받아가세요!</div>
+        </div>
+    </nav>
+    <div class="container py-4 py-md-5 px-4 px-md-3 text-body-secondary" style="position: relative;">
+        <div style="position: absolute;top: 10px;right: 5px;">
+            {% if request.user.is_authenticated %}
+                <div class="dropdown">
+                    <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none;">
+                        <img src="{{ request.user.profile_picture.url }}" alt="프로필 사진" width=50 height=50 >
+                        <img src="/media/images/eggplant_01.gif" alt="움직이는가지" height="50">
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">프로필</a></li>
+                        <li><a class="dropdown-item" href="#">회원 정보 수정</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <form class="dropdown" action="{% url 'accounts:delete' request.user.pk %}" method="POST">
+                                {% csrf_token %}
+                                <button class="btn" type="submit">회원탈퇴</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
                 <div class="logout-delete-container">
                     <form action="{% url 'accounts:logout' %}" method="POST">
                         {% csrf_token %}
                         <button type="submit" class="logout-delete-btn">로그아웃</button>
                     </form>
-                    <form action="{% url 'accounts:delete' request.user.pk %}" method="POST">
-                        {% csrf_token %}
-                        <button type="submit" class="logout-delete-btn">회원탈퇴</button>
-                    </form>
                 </div>
                 {% else %}
-                <a href="{% url 'accounts:login' %}">로그인</a>
-                <a href="{% url 'accounts:signup' %}">회원가입</a>
+                <a href="{% url 'accounts:signup' %}" style=" padding: 10px; display: inline-block; background: #560c7b; color: #fff; border-radius: 10px; cursor: pointer; text-decoration: none;">회원가입</a>
+                <a href="{% url 'accounts:login' %}" style=" padding: 10px; display: inline-block; background: #560c7b; color: #fff; border-radius: 10px; cursor: pointer; text-decoration: none;">로그인</a>
                 
                 <img src="/media/images/eggplant_01.gif" alt="움직이는가지" width="60" onclick="javascript:location.href='/'" style="margin-left: -20px;">
                 {% endif %}
-            </div>
         </div>
-    </nav>
-    <div class="container py-4 py-md-5 px-4 px-md-3 text-body-secondary">
         <a class="navbar-brand" href="/">
             <img src="/media/images/8_logo5.png" alt="Logo" width="180" class="d-inline-block align-text-top" style="" />
             <span style="font-size: 30px; color: #570b7d; font-weight: bold; display: inline-block; vertical-align: top; padding: 33px 0 0 0px; margin-left: -13px;">마켓가지</span>
         </a>
     </div>
-
-    {% if request.user.is_authenticated %}
-    <div class="container welcome-message">
-        <span>안녕하세요, {{ user }}님</span>
-        <img src="/media/images/eggplant_01.gif" alt="움직이는가지">
-    </div>
-    {% endif %}
 
     <main class="container" style="padding: 35px 0">
         {% block content %}
