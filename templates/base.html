@@ -1,4 +1,3 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,9 +15,48 @@
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.all.min.js"></script>
     <script src="https://kit.fontawesome.com/8f954b3564.js" crossorigin="anonymous"></script>
+    <style>
+        /* 기존 스타일 */
+        .auth-links a {
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            margin-right: 20px; /* 링크 사이 */
+            padding-right: 10px; /* 왼쪽 */
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .auth-links a:hover {
+            color: #A78FE9; /* 호버 시 */
+        }
+
+        /* 회원가입 페이지 스타일 추가 */
+        .signup-title {
+            color: #6a0dad; /* 보라색 */
+            font-size: 1.5em; /* 글자 크기 */
+            font-weight: bold; /* 볼드체 */
+        }
+
+        .btn-custom {
+            background-color: #6a0dad; /* 보라색 */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-custom:hover {
+            background-color: #5a0b8c; /* 약간 어두운 보라색 */
+        }
+    </style>
 </head>
 
 <body>
+
     <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #560c7b !important;">
         <div class="container-fluid">
             <a class="navbar-brand" href="{% url 'index' %}">
@@ -29,9 +67,28 @@
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <div class="auth-links">
+                {% if request.user.is_authenticated %}
+                <h3>안녕하세요 {{ user }}</h3>
+                <form action="{% url 'accounts:logout' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" value="로그아웃">
+                </form>
+                <form action="{% url 'accounts:delete' request.user.pk %}" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" value="회원탈퇴">
+                </form>
+                {% else %}
+                <a href="{% url 'accounts:login' %}">로그인</a>
+                <a href="{% url 'accounts:signup' %}">회원가입</a>
+                
+                <img src="/media/images/eggplant_01.gif" alt="움직이는가지" width="60" onclick="javascript:location.href='/'" style="margin-left: -20px;">
+
+                {% endif %}
+            </div>
         </div>
     </nav>
-    <main class="container">
+    <main class="container" style="padding: 35px 0">
         {% block content %}
         {% endblock content %}
     </main>
@@ -60,6 +117,6 @@
             </div>
         </div>
     </footer>
-
 </body>
+
 </html>
