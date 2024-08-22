@@ -12,3 +12,4 @@ urlpatterns = [
     path("signup/", views.signup, name="signup"),
     path("delete/<int:pk>/", views.delete, name="delete"),
 ]
+  
