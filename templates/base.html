@@ -16,7 +16,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.all.min.js"></script>
     <script src="https://kit.fontawesome.com/8f954b3564.js" crossorigin="anonymous"></script>
     <style>
-        /* 로그인/회원가입 링크 스타일 */
+        /* 기존 스타일 */
         .auth-links a {
             color: white;
             font-weight: bold;
@@ -30,11 +30,34 @@
         .auth-links a:hover {
             color: #A78FE9; /* 호버 시 */
         }
+
+        /* 회원가입 페이지 스타일 추가 */
+        .signup-title {
+            color: #6a0dad; /* 보라색 */
+            font-size: 1.5em; /* 글자 크기 */
+            font-weight: bold; /* 볼드체 */
+        }
+
+        .btn-custom {
+            background-color: #6a0dad; /* 보라색 */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-custom:hover {
+            background-color: #5a0b8c; /* 약간 어두운 보라색 */
+        }
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #6E2777 !important;">
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #560c7b !important;">
         <div class="container-fluid">
             <a class="navbar-brand" href="{% url 'index' %}">
                 <img src="/media/images/8_logo.png" alt="Logo" width="180" class="d-inline-block align-text-top">
@@ -59,7 +82,8 @@
                 <a href="{% url 'accounts:login' %}">로그인</a>
                 <a href="{% url 'accounts:signup' %}">회원가입</a>
                 
-                <img src="/media/images/eggplant_01.gif" alt="움직이는가지" width=60 onclick="javascript:location.href='/'">
+                <img src="/media/images/eggplant_01.gif" alt="움직이는가지" width="60" onclick="javascript:location.href='/'" style="margin-left: -20px;">
+
                 {% endif %}
             </div>
         </div>
@@ -93,7 +117,6 @@
             </div>
         </div>
     </footer>
-
 </body>
 
 </html>

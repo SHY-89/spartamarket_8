@@ -1,0 +1,18 @@
+/* styles.css */
+.signup-title {
+    color: #6a0dad; /* 보라색 */
+    font-size: 1.5em; /* 글자 크기 */
+    font-weight: bold; /* 볼드체 */
+}
+.btn-custom {
+    background-color: #6a0dad; /* 보라색 */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+}
+.btn-custom:hover {
+    background-color: #5a0b8c; /* 약간 어두운 보라색 */
+}

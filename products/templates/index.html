@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% comment %} 물건 목록 == 메인 페이지 {% endcomment %}
+
+{% block content %}
+
+{% for product in index %}
+    <p><a class="btn" href="{% url 'products:read' product.pk %}">{{ product.title }}</a></p>
+
+{% endfor%}
+<p style="text-align: end;">
+<a class="btn" href="{% url 'products:create' %}"style="color: #570b7b;">글쓰기</a>
+</p>
+
+
+{% endblock content %}
