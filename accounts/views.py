@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.views.decorators.http import require_POST
 
 from accounts.models import Users
-from .forms import CustomUserCreationForm, CustomAuthenticationForm
+from .forms import CustomUserCreationForm, CustomAuthenticationForm, CustomUserChangeForm
 from django.contrib.auth.decorators import login_required
 
 def index(request):
@@ -50,3 +50,18 @@ def delete(request, pk):
         request.user.delete()
         auth_logout(request)
     return redirect("index")
+
+
+def update(request, pk):
+    user = Users.objects.get(pk=pk)
+    if request.method == "POST": pass
+        # form = CustomUserCreationForm(request.POST)
+        # if form.is_valid():
+        #     user = form.save()
+        #     auth_login(request, user)
+        #     return redirect("index")
+    else:
+        form = CustomUserChangeForm(instance=user)
+    context = {"form": form}
+    return render(request, "accounts/update.html", context)
+
