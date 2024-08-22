@@ -1,29 +1,27 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ProductForm
-from .models import Index
+from .models import Product
 from django.views.decorators.http import require_http_methods,require_POST
 
 
 
 def index(request):
-    index = Index.objects.all()
+    index = Product.objects.all()
     context = {
         "index" : index,
     }
     return render(request, "index.html", context)
 
 
-def products(request):
-    return render(request, "product.html")
-
-
 @ require_http_methods(["GET", "POST"])
 def create(request):
     if request.method == 'POST':
-        forms = ProductForm(request.POST)
+        forms = ProductForm(request.POST, request.FILES)
         if forms.is_valid():
-            forms.save()
-            return redirect("index")
+            products = forms.save(commit=False)
+            products.uuid = request.user
+            products.save()
+            return redirect("products:read", products.pk)
         
     else:
         forms = ProductForm()
@@ -34,7 +32,7 @@ def create(request):
 
 
 def read(request, pk):
-    product = get_object_or_404(Index,pk=pk)
+    product = get_object_or_404(Product,pk=pk)
     context = {
         
         'product': product
@@ -44,13 +42,17 @@ def read(request, pk):
 
 @ require_http_methods(["GET", "POST"])
 def update(request, pk):
-    product = get_object_or_404(Index,pk=pk)
+    product = get_object_or_404(Product,pk=pk)
+    if product.uuid.pk != request.user.pk:
+        return redirect("index")
     if request.method == 'POST':
-        forms = ProductForm(request.POST, instance=product)
-        if forms.is_valid():
-            forms.save()
-            return redirect("index")
+            forms = ProductForm(request.POST, request.FILES, instance=product)
+            if forms.is_valid():
+                forms.save()
+            return redirect("products:read", pk)
         
+    
+    
     else:
         forms = ProductForm(instance=product)
     context = {
@@ -63,8 +65,9 @@ def update(request, pk):
 
 @ require_POST
 def delete(request, pk):
-    product = get_object_or_404(Index, pk=pk)
-    product.delete()
+    product = get_object_or_404(Product, pk=pk)
+    if product.uuid.pk == request.user.pk:
+        product.delete()
     return redirect("index")
 
 
