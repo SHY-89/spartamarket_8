@@ -16,6 +16,72 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.all.min.js"></script>
     <script src="https://kit.fontawesome.com/8f954b3564.js" crossorigin="anonymous"></script>
     <style>
+        /* 공통 스타일 */
+        .auth-title {
+            color: #6a0dad; /* 보라색 */
+            font-size: 1.5em; /* 글자 크기 */
+            font-weight: bold; /* 볼드체 */
+            text-align: left; /* 왼쪽 정렬 */
+        }
+
+        .btn-custom {
+            background-color: #6a0dad; /* 보라색 */
+            color: white;
+            border: none;
+            padding: 6px 12px; /* 버튼 크기 줄이기 */
+            border-radius: 5px;
+            font-size: 0.9em; /* 글자 크기 줄이기 */
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-custom:hover {
+            background-color: #AC92ED; /* 약간 어두운 보라색 */
+        }
+
+        .form-container {
+            margin-top: 20px;
+        }
+
+        /* 네비게이션 바 아래 텍스트 스타일 */
+        .welcome-message {
+            color: #6a0dad; /* 보라색 */
+            font-weight: bold; /* 볼드체 */
+            margin-top: 20px; /* 네비게이션 바와의 거리 */
+            font-size: 1.2em; /* 글자 크기 */
+            display: flex;
+            align-items: center;
+        }
+
+        .welcome-message img {
+            margin-left: 5px; /* 텍스트와 이미지 사이 거리 조정 */
+            width: 65px; /* 이미지 크기 */
+        }
+
+        /* 로그아웃 및 회원탈퇴 버튼 스타일 */
+        .logout-delete-container {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px; /* 버튼 간의 공백 */
+        }
+
+        .logout-delete-btn {
+            background-color: #E6E6FA; /* 연한 보라색 */
+            color: #6a0dad; /* 글자 색상 보라색 */
+            border: 1px solid #6a0dad; /* 보라색 테두리 */
+            padding: 6px 12px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+
+        .logout-delete-btn:hover {
+            background-color: #A558E2; /* 호버 시 배경색 */
+            color: white; /* 호버 시 글자색 하얀색 */
+        }
+
         /* 기존 스타일 */
         .auth-links a {
             color: white;
@@ -30,33 +96,10 @@
         .auth-links a:hover {
             color: #A78FE9; /* 호버 시 */
         }
-
-        /* 회원가입 페이지 스타일 추가 */
-        .signup-title {
-            color: #6a0dad; /* 보라색 */
-            font-size: 1.5em; /* 글자 크기 */
-            font-weight: bold; /* 볼드체 */
-        }
-
-        .btn-custom {
-            background-color: #6a0dad; /* 보라색 */
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 1em;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .btn-custom:hover {
-            background-color: #5a0b8c; /* 약간 어두운 보라색 */
-        }
     </style>
 </head>
 
 <body>
-
     <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #560c7b !important;">
         <div class="container-fluid">
             <a class="navbar-brand" href="{% url 'index' %}">
@@ -69,29 +112,39 @@
             </button>
             <div class="auth-links">
                 {% if request.user.is_authenticated %}
-                <h3>안녕하세요 {{ user }}</h3>
-                <form action="{% url 'accounts:logout' %}" method="POST">
-                    {% csrf_token %}
-                    <input type="submit" value="로그아웃">
-                </form>
-                <form action="{% url 'accounts:delete' request.user.pk %}" method="POST">
-                    {% csrf_token %}
-                    <input type="submit" value="회원탈퇴">
-                </form>
+                <img src="{{ request.user.profile_picture.url }}" alt="프로필 사진" width=50 height=50 >
+                <div class="logout-delete-container">
+                    <form action="{% url 'accounts:logout' %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="logout-delete-btn">로그아웃</button>
+                    </form>
+                    <form action="{% url 'accounts:delete' request.user.pk %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="logout-delete-btn">회원탈퇴</button>
+                    </form>
+                </div>
                 {% else %}
                 <a href="{% url 'accounts:login' %}">로그인</a>
                 <a href="{% url 'accounts:signup' %}">회원가입</a>
                 
                 <img src="/media/images/eggplant_01.gif" alt="움직이는가지" width="60" onclick="javascript:location.href='/'" style="margin-left: -20px;">
-
                 {% endif %}
             </div>
         </div>
     </nav>
+
+    {% if request.user.is_authenticated %}
+    <div class="container welcome-message">
+        <span>안녕하세요, {{ user }}님</span>
+        <img src="/media/images/eggplant_01.gif" alt="움직이는가지">
+    </div>
+    {% endif %}
+
     <main class="container" style="padding: 35px 0">
         {% block content %}
         {% endblock content %}
     </main>
+
     <footer class="bd-footer bg-body-tertiary">
         <div class="container py-4 py-md-5 px-4 px-md-3 text-body-secondary">
             <div class="row">
