@@ -35,3 +35,6 @@ class CustomAuthenticationForm(AuthenticationForm):
         label=_("아이디"),
         widget=forms.TextInput(attrs={"autofocus": True}),
     )
+
+class CustomUserChangeForm(UserChangeForm):
+    pass
