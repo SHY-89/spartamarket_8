@@ -10,7 +10,7 @@ def index(request):
     context = {
         "index" : index,
     }
-    return render(request, "index.html", context)
+    return render(request, "products/index.html", context)
 
 
 @ require_http_methods(["GET", "POST"])
@@ -28,7 +28,7 @@ def create(request):
         
     context = { "forms" : forms
         }
-    return render(request, "create.html", context)
+    return render(request, "products/create.html", context)
 
 
 def read(request, pk):
@@ -37,7 +37,7 @@ def read(request, pk):
         
         'product': product
     }
-    return render(request, "read.html", context)
+    return render(request, "products/read.html", context)
 
 
 @ require_http_methods(["GET", "POST"])
@@ -60,7 +60,7 @@ def update(request, pk):
         'forms':forms
     }
     
-    return render(request, "update.html", context)
+    return render(request, "products/update.html", context)
 
 
 @ require_POST
