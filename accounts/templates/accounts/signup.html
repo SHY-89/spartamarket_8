@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="signup-container">
-        <h1 class="signup-title">회원가입</h1>
-        <br>
-        <form action="{% url 'accounts:signup' %}" method="POST">
-            {% csrf_token %}
+<div class="form-container" style="width: 462px;">
+    <h1 class="page-title">회원가입</h1>
+    
+    <form action="{% url 'accounts:signup' %}" method="POST" class="product-form">
+        {% csrf_token %}
             {{ form.username.label_tag }}
             {{ form.username }}
             <br>
@@ -32,7 +32,9 @@
                 <li>확인을 위해 이전과 동일한 비밀번호를 입력하세요.</li>
             </ul>
             <br>
-            <button class="btn-custom" type="submit">가입완료!</button>
-        </form>
-    </div>
-{% endblock %}
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">가입완료</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}
