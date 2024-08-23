@@ -75,3 +75,14 @@ def delete(request, pk):
     #     related_name="like_products",
     #     null=True 
     # )
+
+@require_POST
+def like(request, pk):
+    if request.user.is_authenticated:
+        product = get_object_or_404(Index, pk=pk)
+        if product.like_users.filter(pk=request.user.pk).exists():
+            product.like_users.remove(request.user)
+        else:
+            product.like_users.add(request.user)
+        return redirect("products:read", pk)
+    return redirect("accounts:login")
