@@ -18,7 +18,7 @@
 <button type="submit">삭제</button> 
 {% comment %} 글쓴사람만 삭제기능추가 {% endcomment %}
 </form>
-
+{% else %}
 <form action="{% url 'products:like' product.pk %}" method="POST">
     {% csrf_token %}
     {% if request.user in product.like_users.all %}

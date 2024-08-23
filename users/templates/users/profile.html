@@ -3,6 +3,9 @@
 {% block content %}
     <h1>welcome to {{ member.username }}'s profile page</h1>
 
+    팔로워: <br>
+    팔로우: 
+
     {% if request.user != member %}
         <form action="{% url 'users:follow' member.pk %}" method="POST">
             {% csrf_token %}
@@ -13,4 +16,20 @@
             {% endif %}
         </form>
     {% endif %}
+
+    {% if request.user == member %}
+    <h2>내가 찜한 물건들</h2>
+    <ul>
+        {% for product in member.like_products.all %}
+        <li><a href="{% url 'products:read' product.pk %}">{{ product.title }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    
+    <h2>올린 물건들</h2>
+    <ul>
+        {% for product in member.products.all %}
+        <li><a href="{% url 'products:read' product.pk %}">{{ product.title }}</a></li>
+        {% endfor %}
+    </ul>
 {% endblock content %}
