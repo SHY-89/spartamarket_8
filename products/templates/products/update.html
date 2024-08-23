@@ -1,22 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div style="text-align: center;"><br>
-    <h1 style="
-    color: #570b7b;">글 수정하기</h1><br>
+<div class="form-container">
+    <h1 class="page-title">글 수정하기</h1>
     
-<form action="" method="POST" enctype="multipart/form-data">
-    
-{% csrf_token %}
-{{ forms.as_p }}
-
-<button type="submit">수정 완료</button>
-
-</form>
-
-
+    <form action="" method="POST" enctype="multipart/form-data" class="product-form">
+        {% csrf_token %}
+        {{ forms.as_p }}
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">수정 완료</button>
+        </div>
+    </form>
+</div>
 {% endblock content %}
-
-
-{% comment %} 글쓴사람만 수정기능추가하기  {% endcomment %}
-{% comment %} 물건 수정하기 페이지 {% endcomment %}

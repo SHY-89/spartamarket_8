@@ -15,6 +15,8 @@ def index(request):
 
 @ require_http_methods(["GET", "POST"])
 def create(request):
+    if not request.user.is_authenticated:
+        return redirect("accounts:login")
     if request.method == 'POST':
         forms = ProductForm(request.POST, request.FILES)
         if forms.is_valid():
@@ -34,7 +36,6 @@ def create(request):
 def read(request, pk):
     product = get_object_or_404(Product,pk=pk)
     context = {
-        
         'product': product
     }
     return render(request, "products/read.html", context)
@@ -50,9 +51,6 @@ def update(request, pk):
             if forms.is_valid():
                 forms.save()
             return redirect("products:read", pk)
-        
-    
-    
     else:
         forms = ProductForm(instance=product)
     context = {
@@ -69,15 +67,6 @@ def delete(request, pk):
     if product.uuid.pk == request.user.pk:
         product.delete()
     return redirect("index")
-
-
-
-    # like_user = models.Foreingkey(
-    #     settings.AUTH_USER_MODEL,
-    #     on_delete=models.CASCADE,
-    #     related_name="like_products",
-    #     null=True 
-    # )
 
 @require_POST
 def like(request, pk):

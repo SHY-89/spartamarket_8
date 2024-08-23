@@ -1,14 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div style="text-align: center">
-    <h1 class="auth-title" style="text-align: center">로그인</h1>
-    <div class="form-container">
-        <form action="{% url 'accounts:login' %}" method="POST">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button class="btn-custom" type="submit">로그인</button>
-        </form>
-    </div>
+<div class="form-container" style="width: 462px;">
+    <h1 class="page-title">로그인</h1>
+    
+    <form action="{% url 'accounts:login' %}" method="POST" class="product-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">로그인</button>
+        </div>
+    </form>
 </div>
-{% endblock %}
+{% endblock content %}
