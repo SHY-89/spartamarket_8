@@ -1,0 +1,157 @@
+
+{% extends "base.html" %}
+{% block content %}
+<title>{{ product.title }}</title>
+<div class="product-detail-container">
+    {% if product.photo %}
+    <div class="product-image">
+        <a class="back-btn" href="{% url 'index' %}">목록으로</a>
+        <img src="{{ product.photo.url }}" alt="{{ product.photo }}" class="detail_img">
+    </div>
+    {% endif %}
+    <div class="product-info">
+        <h1>{{ product.title }}</h1>
+        <p>{{ product.content }}</p>
+
+        <div class="product-actions">
+            {% if product.uuid.pk == request.user.pk %}
+            <div class="action-buttons">
+                <a class="btn edit-btn" href="{% url 'products:update' product.pk %}">수정하기</a>
+                <form action="{% url 'products:delete' product.pk %}" method="POST" class="delete-form">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-delete">삭제</button>
+                </form>
+            </div>
+            {% endif %}
+        </div>
+        <p class="product-author">작성자: {{ product.uuid.username }} {{ product.created_at|date:"y.m.d" }}</p>
+
+    </div>
+</div>
+<style>
+    .product-detail-container {
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    .product-image {
+        position: relative;
+        flex: 1;
+        max-width: 400px; /* 이미지 크기 최대 400px */
+    }
+    .back-btn {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background-color: #560C7B; /* 포인트 컬러 */
+        color: white;
+        padding: 3px 8px; /* 버튼 크기 줄이기 */
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 12px; /* 버튼 글씨 크기 줄이기 */
+    }
+    .back-btn:hover {
+        background-color: #400960;
+    }
+    .product-image img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+    .product-info {
+        flex: 2;
+        position: relative; /* 버튼 위치를 위한 기준 설정 */
+        padding-bottom: 60px; /* 버튼 공간을 위한 여백 추가 */
+    }
+    .product-info h1 {
+        font-size: 24px;
+        font-weight: bold;
+        color: #560C7B; /* 포인트 컬러 */
+        margin-bottom: 10px;
+    }
+    .product-info p {
+        font-size: 16px;
+        line-height: 1.6;
+        margin-bottom: 10px;
+    }
+    .product-author { position: relative; bottom: -50px; font-size: 14px; color: #9C9E9E; margin-bottom: 10px; }
+    /*.product-author { font-size: 14px; color: #333; margin-bottom: 10px; }*/
+    /*.product-date { font-size: 14px; color: #777; margin-bottom: 20px; }*/
+    .product-actions {
+        position: absolute;
+        bottom: 20px; /* 하단 여백 */
+        right: 20px; /* 오른쪽 여백 */
+        display: flex;
+        gap: 50px; /* 버튼 간격 조정 */
+    }
+    .btn {
+        background-color: #560C7B; /* 포인트 컬러 */
+        color: white;
+        padding: 6px 15px; /* 버튼 크기 줄이기 */
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 14px; /* 버튼 글씨 크기 줄이기 */
+        text-align: center;
+    }
+    .edit-btn {
+        color: #570B7B
+        background-color: #E6E6FA; /* 포인트 컬러 */
+        margin: 5px;
+    }
+    .edit-btn:hover { background-color: #560C7B; color: #fff; }
+    .delete-form .btn-delete {
+        background-color: #9C9E9E;
+        margin: 5px;
+        color: #fff;
+        padding: 6px 28px; /* 버튼 크기 줄이기 */
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px; /* 버튼 글씨 크기 줄이기 */
+        text-align: center;
+    }
+    .delete-form .btn-delete:hover {
+        background-color: #C62828;
+    }
+</style>
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+{% comment %} {% comment %} {% extends "base.html" %}
+{% comment %} 물건 디테일 조회하기 페이지 {% endcomment %}
+
+{% comment %} {% block content %}
+<title>{{ product.title }}</title><br>
+{{ product.uuid }}
+{% if product.photo %}
+<img src="{{ product.photo.url }}" alt="{{ product.photo }}" class="detail_img">
+{% endif %}
+{{ product.content }}<br>
+{{ product.created_at|date:"y.m.d" }}
+<br>
+<a class="btn" href="{% url 'index' %}">목록으로</a>
+{% if product.uuid.pk == request.user.pk %}
+<a class="btn" href="{% url 'products:update' product.pk %}">수정하기</a>
+<form action="{% url 'products:delete' product.pk %}" method= "POST">
+{% csrf_token %}
+<button type="submit">삭제</button> 
+{% comment %} 글쓴사람만 삭제기능추가 {% endcomment %}
+{% comment %} </form>
+{% endif %}
+
+{% endblock content %}
+{% endcomment %} 
