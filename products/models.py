@@ -8,7 +8,7 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     photo = models.ImageField(upload_to="images/", blank=True) 
-    
+    cnt = models.IntegerField(default=0)
     uuid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="products")
 
     like_users = models.ManyToManyField(

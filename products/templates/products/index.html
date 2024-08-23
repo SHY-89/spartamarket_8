@@ -11,6 +11,7 @@
         {% endif %}
         <div class="product-title">
             <a href="{% url 'products:read' product.pk %}">{{ product.title }}</a>
+            <span style="float: right;">뷰{{ product.cnt }}</span>
         </div>
     </div>
     {% endfor %}

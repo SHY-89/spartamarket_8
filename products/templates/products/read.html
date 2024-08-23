@@ -30,5 +30,16 @@
 
     </div>
 </div>
-
+<script>
+    $(function(){
+        $.ajax({
+            url : "{% url 'products:update_cnt' %}",
+	        type : 'POST',
+            data : {csrfmiddlewaretoken: "{{ csrf_token }}", pk: '{{ product.pk }}'},
+            success : function(data, jqXHR, textStatus) {
+                console.log(data)
+            }
+        });
+    })
+</script>
 {% endblock content %}
