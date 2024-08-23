@@ -92,6 +92,18 @@
         .auth-links a:hover {
             color: #A78FE9; /* 호버 시 */
         }
+
+        .login_button {
+        
+        padding: 10px; 
+        display: inline-block; 
+        background: #560c7b; 
+        color: #fff; 
+        border-radius: 10px; 
+        cursor: pointer; 
+        text-decoration: none;
+        }
+
     </style>
 </head>
 
@@ -129,10 +141,9 @@
                     </form>
                 </div>
                 {% else %}
-                <a href="{% url 'accounts:signup' %}" style=" padding: 10px; display: inline-block; background: #560c7b; color: #fff; border-radius: 10px; cursor: pointer; text-decoration: none;">회원가입</a>
-                <a href="{% url 'accounts:login' %}" style=" padding: 10px; display: inline-block; background: #560c7b; color: #fff; border-radius: 10px; cursor: pointer; text-decoration: none;">로그인</a>
+                <a href="{% url 'accounts:signup' %}" class = "login_button">회원가입</a>
+                <a href="{% url 'accounts:login' %}" class = "login_button">로그인</a>
                 
-                <img src="/media/images/eggplant_01.gif" alt="움직이는가지" width="60" onclick="javascript:location.href='/'" style="margin-left: -20px;">
                 {% endif %}
         </div>
         <a class="navbar-brand" href="/">

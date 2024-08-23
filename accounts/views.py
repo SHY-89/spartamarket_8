@@ -61,28 +61,33 @@ def delete(request, pk):
 
 @require_http_methods(["GET", "POST"])
 def update(request, pk):
-    user = Users.objects.get(pk=pk)
-    if request.method == "POST":
-        form = CustomUserChangeForm(request.POST, instance=user)
-        if form.is_valid():
-            user = form.save()
-            return redirect("index")
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            form = CustomUserChangeForm(request.POST, instance=request.user)
+            if form.is_valid():
+                user = form.save()
+                return redirect("index")
+        else:
+            form = CustomUserChangeForm(instance=request.user)
+        context = {"form": form}
+        return render(request, "accounts/update.html", context)
     else:
-        form = CustomUserChangeForm(instance=user)
-    context = {"form": form}
-    return render(request, "accounts/update.html", context)
+        return redirect("accounts:login")
 
 
 @require_http_methods(["GET", "POST"])
 def change_password(request):
-    if request.method == "POST":
-        form = PasswordChangeForm(request.user, request.POST)
-        if form.is_valid():
-            form.save()
-            update_session_auth_hash(request, form.user)
-            return redirect("index")
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            form = PasswordChangeForm(request.user, request.POST)
+            if form.is_valid():
+                form.save()
+                update_session_auth_hash(request, form.user)
+                return redirect("index")
 
-    else:
-        form = PasswordChangeForm(request.user)
-    context = {"form": form}
-    return render(request, "accounts/change_password.html", context)
+        else:
+            form = PasswordChangeForm(request.user)
+        context = {"form": form}
+        return render(request, "accounts/change_password.html", context)
+    else: 
+        return redirect("accounts:login")
