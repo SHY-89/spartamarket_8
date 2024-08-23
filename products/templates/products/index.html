@@ -3,6 +3,44 @@
 
 {% block content %}
 
+
+<div style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* 검색창과 버튼 사이의 간격 */
+">
+    <div style="position: relative;">
+        <input type="text" style="
+            width: 400px;
+            height: 49px;
+            text-align: justify;
+            border-radius: 5px;
+            padding-left: 40px; /* 아이콘 공간을 위해 패딩 추가 */
+        " placeholder="검색어를 입력해주세요">
+        <i class="fa-solid fa-magnifying-glass" style="
+            position: absolute;
+            right: 10px; /* 입력창 내부의 오른쪽에 아이콘 배치 */
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888; /* 아이콘 색상 */
+        " aria-hidden="true"></i>
+    </div>
+
+    <a class="btn create-btn" href="/products/create/" style="
+        padding: 10px 20px;
+        background-color: #560C7B;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+    ">등록하기</a>
+    <br><br>
+</div>
+<br>
+
+{% comment %} <div style="text-align: right;">
+    <a class="btn create-btn" href="/products/create/">등록하기</a>
+</div></p> {% endcomment %}
 <div class="product-list">
     {% for product in index %}
     <div class="product-item">
@@ -20,9 +58,6 @@
     {% endfor %}
 </div>
 
-<p style="text-align: right;">
-    <a class="btn create-btn" href="/products/create/">글쓰기</a>
-</p>
 
 <style>
     .product-list {
@@ -66,10 +101,11 @@
         text-decoration: none;
     }
     .create-btn {
+        font-weight: 700;
         color: #570b7b;
         font-size: larger;
         background-color: #fff;
-        padding: 10px 20px;
+        padding: 5px 12px;
         border-radius: 5px;
         text-decoration: none;
         border: 2px solid #570b7b;
