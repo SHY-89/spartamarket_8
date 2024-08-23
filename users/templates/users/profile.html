@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>welcome to {{ member.username }}'s profile page</h1>
+
+    {% if request.user != member %}
+        <form action="{% url 'users:follow' member.pk %}" method="POST">
+            {% csrf_token %}
+            {% if request.user in member.followers.all %}
+                <input type="submit" value="언팔로우 하기">
+            {% else %}
+                <input type="submit" value="팔로우 하기">
+            {% endif %}
+        </form>
+    {% endif %}
+{% endblock content %}
