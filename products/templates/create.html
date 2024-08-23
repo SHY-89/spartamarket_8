@@ -4,10 +4,12 @@
 
 {% block content %}
 <div style="text-align: center;"><br>
-    <h1>내 물건 팔기</h1>
-    <br>
+    <h1 style="
+    color: #570b7b;">내 물건 팔기</h1><br>
     
-    <form action="{% url 'products:create' %}" method= "POST">
+    
+    <form action="{% url 'products:create' %}" method= "POST" 
+    enctype="multipart/form-data">
         {% csrf_token %}
         {{ forms.as_p}}
     
