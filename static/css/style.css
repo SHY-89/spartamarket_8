@@ -203,27 +203,30 @@
 .product-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 40px;
     justify-content: center;
 }
 .product-item {
-    width: 200px; /* 이미지 크기에 맞춰 조정 */
+    width: 300px;
+    height: 375px;
     background-color: #fff;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     overflow: hidden;
     text-align: center;
     margin-bottom: 20px;
+    cursor: pointer;
 }
 .product-image {
     width: 100%;
-    height: auto; /* 높이를 auto로 설정하여 이미지 비율 유지 */
     padding: 10px;
-    background-color: #f8f8f8; /* 이미지가 없는 부분을 채우는 배경색 */
+    background-size: cover;
+    background-size: 300px 326px;
+    height: 87%;
 }
 .product-image img {
     max-width: 100%;
-    max-height: 150px; /* 이미지 높이 제한 */
+    max-height: 250px; /* 이미지 높이 제한 */
     width: auto;
     height: auto;
     object-fit: contain; /* 이미지가 잘리지 않도록 설정 */

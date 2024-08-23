@@ -5,10 +5,8 @@
     {% for product in index %}
     <div class="product-item">
         {% if product.photo %}
-        <div class="product-image">
-            <a href="{% url 'products:read' product.pk %}">
-                <img src="{{ product.photo.url }}" alt="{{ product.title }}" class="product-thumbnail">
-            </a>
+        <div class="product-image" style="background-image: url({{ product.photo.url }});" onclick="location='{% url 'products:read' product.pk %}'">
+            
         </div>
         {% endif %}
         <div class="product-title">
