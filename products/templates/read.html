@@ -3,7 +3,7 @@
 
 {% block content %}
 {{ product.title }}<br>
-{{ product.uuid }}
+<a href="{% url 'users:profile' product.uuid.username %}">{{ product.uuid }}</a>
 {% if product.photo %}
 <img src="{{ product.photo.url }}" alt="{{ product.photo }}" class="detail_img">
 {% endif %}
