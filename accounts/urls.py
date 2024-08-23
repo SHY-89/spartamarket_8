@@ -14,4 +14,3 @@ urlpatterns = [
     path("update/<int:pk>/", views.update, name="update"),
     path("change_password/", views.change_password, name="change_password"),
 ]
-  

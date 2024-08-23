@@ -10,3 +10,13 @@ class Product(models.Model):
     photo = models.ImageField(upload_to="images/", blank=True) 
     uuid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="products")
 
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="products"
+    )
+
+    like_users = models.ManyToManyField(
+        settings.AUTH_USER_MODEL, related_name="like_products"
+    )
+
+    def __str__(self):
+        return self.title
