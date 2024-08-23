@@ -58,8 +58,8 @@
         </a>
         <div style="display: inline-flex; position: absolute; top: 80px; left: 383px;gap: 30px;">
             <div style="position: relative;">
-                <input type="text" style="width: 503px;height: 49px;text-align: justify;border-radius: 5px;padding-left: 10px;padding-right: 42px;" placeholder="검색어를 입력해주세요">
-                <i class="fa-solid fa-magnifying-glass" style="position: absolute;right: 15px;top: 50%;transform: translateY(-50%);color: #560c7b;font-size: 23px;" aria-hidden="true"></i>
+                <input type="text" id="serch_box" style="width: 503px;height: 49px;text-align: justify;border-radius: 5px;padding-left: 10px;padding-right: 42px;" placeholder="검색어를 입력해주세요" onkeydown="enterkey()" value="{{ request.GET.serch_text }}">
+                <i class="fa-solid fa-magnifying-glass" style="position: absolute;right: 15px;top: 50%;transform: translateY(-50%);color: #560c7b;font-size: 23px;" aria-hidden="true" onclick="serchs()"></i>
             </div>
     
             <a class="btn create-btn" href="{% url 'products:create' %}" style="padding: 9px 20px;background-color: #560C7B;color: white;text-decoration: none;border-radius: 5px;border: 0;">등록하기</a>
@@ -105,6 +105,15 @@
         </ul>
         </div>
     </footer>
-
+<script>
+    function enterkey() {
+        if (window.event.keyCode == 13) {
+            serchs()
+        }
+    }
+    function serchs(){
+        location.href = '{% url "index" %}?serch_text='+serch_box.value;
+    }
+</script>
 </body>
 </html>
