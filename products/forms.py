@@ -15,4 +15,3 @@ class ProductForm(forms.ModelForm):
             'title': forms.TextInput(attrs={'placeholder': '제목'}),
             'content': forms.Textarea(attrs={'placeholder': '게시글 내용을 작성해 주세요.'}),
         }
-        

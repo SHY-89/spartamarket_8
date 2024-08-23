@@ -31,7 +31,6 @@ class CustomAuthenticationForm(AuthenticationForm):
     )
 
 
-
 class CustomUserCreationForm(UserCreationForm):  
    
    class Meta:
@@ -51,6 +50,7 @@ class CustomUserCreationForm(UserCreationForm):
             "email": "email",
         }
 
+
 class CustomAuthenticationForm(AuthenticationForm):
 
 
@@ -58,6 +58,7 @@ class CustomAuthenticationForm(AuthenticationForm):
         label=_("아이디"),
         widget=forms.TextInput(attrs={"autofocus": True}),
     )
+
 
 class CustomUserChangeForm(UserChangeForm):
     password = None
