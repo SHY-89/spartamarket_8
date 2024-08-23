@@ -13,6 +13,22 @@
     <script src="https://kit.fontawesome.com/8f954b3564.js" crossorigin="anonymous"></script>
     <style>
         /* 공통 스타일 */
+        .signup-container, .update-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 0px;
+        }
+    
+        .signup-title {
+            color: #6a0dad;
+            font-size: 1.8em;
+            font-weight: bold; 
+            text-align: center; 
+            margin-bottom: 50px;
+        }
+
         .auth-title {
             color: #6a0dad; /* 보라색 */
             font-size: 1.5em; /* 글자 크기 */
@@ -24,11 +40,12 @@
             background-color: #6a0dad; /* 보라색 */
             color: white;
             border: none;
-            padding: 6px 12px; /* 버튼 크기 줄이기 */
+            padding: 8px 16px; /* 버튼 크기 */
             border-radius: 5px;
-            font-size: 0.9em; /* 글자 크기 줄이기 */
+            font-size: 1.1em;
             cursor: pointer;
             font-weight: bold;
+            margin-bottom: 100px; /* 버튼과 네브바 사이의 여백 증가 */
         }
 
         .btn-custom:hover {
@@ -41,17 +58,17 @@
 
         /* 네비게이션 바 아래 텍스트 스타일 */
         .welcome-message {
-            color: #6a0dad; /* 보라색 */
-            font-weight: bold; /* 볼드체 */
-            margin-top: 20px; /* 네비게이션 바와의 거리 */
-            font-size: 1.2em; /* 글자 크기 */
+            color: #6a0dad; 
+            font-weight: bold; 
+            margin-top: 20px; 
+            font-size: 1.2em;
             display: flex;
             align-items: center;
         }
 
         .welcome-message img {
-            margin-left: 5px; /* 텍스트와 이미지 사이 거리 조정 */
-            width: 65px; /* 이미지 크기 */
+            margin-left: 5px;
+            width: 65px; 
         }
 
         /* 로그아웃 및 회원탈퇴 버튼 스타일 */
@@ -62,9 +79,9 @@
         }
 
         .logout-delete-btn {
-            background-color: #E6E6FA; /* 연한 보라색 */
-            color: #6a0dad; /* 글자 색상 보라색 */
-            border: 1px solid #6a0dad; /* 보라색 테두리 */
+            background-color: #E6E6FA;
+            color: #6a0dad; 
+            border: 1px solid #6a0dad; 
             padding: 6px 12px;
             border-radius: 5px;
             font-size: 0.9em;
@@ -72,19 +89,17 @@
             font-weight: bold;
         }
 
-
         .logout-delete-btn:hover {
-            background-color: #A558E2; /* 호버 시 배경색 */
-            color: white; /* 호버 시 글자색 하얀색 */
+            background-color: #A558E2; 
+            color: white; 
         }
 
-        /* 기존 스타일 */
         .auth-links a {
             color: white;
             font-weight: bold;
             text-decoration: none;
-            margin-right: 20px; /* 링크 사이 */
-            padding-right: 10px; /* 왼쪽 */
+            margin-right: 20px; 
+            padding-right: 10px; 
             font-size: 16px;
             transition: color 0.3s ease;
         }
@@ -93,16 +108,24 @@
             color: #A78FE9; /* 호버 시 */
         }
 
-        .login_button {
         
-        padding: 10px; 
-        display: inline-block; 
-        background: #560c7b; 
-        color: #fff; 
-        border-radius: 10px; 
-        cursor: pointer; 
-        text-decoration: none;
+        .login_button {
+            padding: 10px; 
+            display: inline-block; 
+            background: #560c7b; 
+            color: #fff; 
+            border-radius: 10px; 
+            cursor: pointer; 
+            text-decoration: none;
         }
+
+        .password-confirmation-message {
+            margin-bottom: 10px;
+            font-size: 0.9em;
+            color: #6a0dad;
+            text-align: center;
+        }
+
 
     </style>
 </head>
@@ -114,7 +137,7 @@
         </div>
     </nav>
     <div class="container py-4 py-md-5 px-4 px-md-3 text-body-secondary" style="position: relative;">
-        <div style="position: absolute;top: 10px;right: 5px;">
+        <div style="position: absolute;top: 45px;right: 5px;">
             {% if request.user.is_authenticated %}
                 <div class="dropdown">
                     <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none;">
