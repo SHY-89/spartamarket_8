@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>welcome to {{ member.username }}'s profile page</h1>
-    가입일: <br>
+    유저: {{ member.username }} <br>
+    가입일: {{ member.date_joined }} <br>
 
-    팔로워: <br>
-    팔로우: 
+    팔로우: {{ member.followings.count }} <br>
+    팔로워: {{ member.followers.count }}
 
     {% if request.user != member %}
         <form action="{% url 'users:follow' member.pk %}" method="POST">
