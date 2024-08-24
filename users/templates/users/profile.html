@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <img src="{{ member.profile_picture.url }}"> <br>
+    
     유저: {{ member.username }} <br>
     가입일: {{ member.date_joined }} <br>
 
