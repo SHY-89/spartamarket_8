@@ -346,6 +346,9 @@
     cursor: pointer;
     font-weight: bold;
 }
+#orders {
+    padding: 4px 6px;
+}
 
 .logout_button:hover {
     background-color: #6a0dad; 
