@@ -308,9 +308,9 @@ h5.profile {
     max-height: 250px; /* 이미지 높이 제한 */
     width: auto;
     height: auto;
-    object-fit: contain; /* 이미지가 잘리지 않도록 설정 */
+    object-fit: contain; /* 이미지가 안 잘리게 */
     display: block;
-    margin: 0 auto; /* 이미지가 중앙에 오도록 설정 */
+    margin: 0 auto; /* 이미지가 중앙 */
 }
 .product-title {
     padding: 10px;
@@ -355,29 +355,29 @@ h5.profile {
 }
 
 .auth-title {
-    color: #6a0dad; /* 보라색 */
-    font-size: 1.5em; /* 글자 크기 */
-    font-weight: bold; /* 볼드체 */
-    text-align: left; /* 왼쪽 정렬 */
+    color: #6a0dad; 
+    font-size: 1.5em; 
+    font-weight: bold; 
+    text-align: left;
 }
 
 .btn-custom {
-    background-color: #6a0dad; /* 보라색 */
+    background-color: #6a0dad; 
     color: white;
     border: none;
-    padding: 8px 16px; /* 버튼 크기 */
+    padding: 8px 16px;
     border-radius: 5px;
     font-size: 1.1em;
     cursor: pointer;
     font-weight: bold;
-    margin-bottom: 100px; /* 버튼과 네브바 사이의 여백 증가 */
+    margin-bottom: 100px; /* 버튼이랑 네브바 사이 여백 */
 }
 
 .btn-custom:hover {
-    background-color: #AC92ED; /* 약간 어두운 보라색 */
+    background-color: #AC92ED; 
 }
 
-/* 네비게이션 바 아래 텍스트 스타일 */
+/* 네비게이션 바 아래 텍스트 */
 .welcome-message {
     color: #6a0dad; 
     font-weight: bold; 
@@ -392,7 +392,7 @@ h5.profile {
     width: 65px; 
 }
 
-/* 로그아웃 및 회원탈퇴 버튼 스타일 */
+/* 로그아웃 및 회원탈퇴 버튼 */
 .logout-delete-container {
     margin-top: 20px;
     display: flex;
@@ -445,7 +445,7 @@ h5.profile {
 }
 
 .auth-links a:hover {
-    color: #A78FE9; /* 호버 시 */
+    color: #A78FE9;
 }
 
 
@@ -474,50 +474,65 @@ h5.profile {
     background-color: #fff;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
+
 .read-page .product-image {
     position: relative;
     flex: 1;
-    max-width: 400px; /* 이미지 크기 최대 400px */
+    max-width: 400px; 
 }
+
 .read-page .back-btn {
     position: absolute;
     top: 10px;
     left: 10px;
-    background-color: #560C7B; /* 포인트 컬러 */
+    background-color: #560C7B; 
     color: white;
-    padding: 3px 8px; /* 버튼 크기 줄이기 */
+    padding: 3px 8px; 
     text-decoration: none;
     border-radius: 5px;
-    font-size: 12px; /* 버튼 글씨 크기 줄이기 */
+    font-size: 12px; 
 }
+
 .read-page .back-btn:hover {
     background-color: #400960;
 }
+
 .read-page .product-image img {
     width: 100%;
     height: auto;
     object-fit: cover;
     border-radius: 8px;
 }
+
 .read-page .product-info {
     flex: 2;
-    position: relative; /* 버튼 위치를 위한 기준 설정 */
-    padding-bottom: 60px; /* 버튼 공간을 위한 여백 추가 */
+    position: relative; 
+    padding-bottom: 60px; 
 }
+
 .read-page .product-info h1 {
     font-size: 24px;
     font-weight: bold;
-    color: #560C7B; /* 포인트 컬러 */
+    color: #560C7B; 
     margin-bottom: 10px;
 }
+
 .read-page .product-info p {
     font-size: 16px;
     line-height: 1.6;
     margin-bottom: 10px;
 }
-.read-page .product-author { position: relative; bottom: -50px; font-size: 14px; color: #9C9E9E; margin-bottom: 10px; }
+
+.read-page .product-author { 
+    position: relative; 
+    bottom: -50px; 
+    font-size: 14px; 
+    color: #9C9E9E; 
+    margin-bottom: 10px; }
+
 /*.product-author { font-size: 14px; color: #333; margin-bottom: 10px; }*/
 /*.product-date { font-size: 14px; color: #777; margin-bottom: 20px; }*/
+
 .read-page .product-actions {
     position: absolute;
     bottom: 20px; /* 하단 여백 */
@@ -525,6 +540,7 @@ h5.profile {
     display: flex;
     gap: 50px; /* 버튼 간격 조정 */
 }
+
 .product_like {
     position: absolute;
     top: 10px; /* 상단 여백 */
@@ -580,12 +596,12 @@ h5.profile {
 
 .comment-form-container {
     position: relative;
-    margin-top: 10px; /* 폼과 버튼 간격 조정 */
+    margin-top: 10px; /* 폼 버튼 간격 */
     text-align: left
 }
 
 .custom-comment-textarea {
-    width: calc(100% - 45px); /* 버튼의 너비를 고려한 텍스트 영역 너비 */
+    width: calc(100% - 45px); /* 버튼너비에 따른 텍스트 영역 너비 */
     margin-right: 10px;
 }
 
@@ -593,7 +609,7 @@ h5.profile {
     position: absolute;
     right: 0;
     bottom: 0;
-    width: 80px; /* 버튼의 너비 조정 */
+    width: 80px; /* 버튼 너비 */
 }
 
 /* 댓글 목록 왼쪽 정렬 */
@@ -605,7 +621,7 @@ h5.profile {
 
 .comment-list li {
     text-align: left; /* 댓글 왼쪽 정렬 */
-    margin-bottom: 10px; /* 댓글 간의 간격 조정 */
+    margin-bottom: 10px; /* 댓글 간격 */
 }
 
 /* 내가 찜한 물건 */
@@ -648,9 +664,9 @@ h5.profile {
 /* 댓글 작성 버튼 */
 .logout-delete-btn {
     position: absolute;
-    bottom: -3px; /* 폼 하단과 버튼 간격 */
-    right: 78px; /* 폼 우측과 버튼 간격 */
-    width: 55px; /* 버튼 너비 */
+    bottom: -3px; 
+    right: 78px; 
+    width: 55px; 
     margin: -33px;
 }
 
