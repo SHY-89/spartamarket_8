@@ -50,23 +50,20 @@
             {% for product in member.like_products.all %}
             <div class="product-item">
                 {% if product.photo %}
-                <div class="product-image" style="background-image: url({{ product.photo.url }});" onclick="location='{% url 'products:read' product.pk %}'">
-                    
-                </div>
+                <img src="{{ product.photo.url }}" alt="" onclick="location='{% url 'products:read' product.pk %}'">
                 {% endif %}
-                <div class="product-title">
-                    <a href="{% url 'products:read' product.pk %}">{{ product.title }}</a>
-                </div>
             </div>
             {% endfor %}
         </div>
         {% endif %}
         <div class="form-container row">
-            <ul>
-                {% for product in member.products.all %}
-                <li><a href="{% url 'products:read' product.pk %}">{{ product.title }}</a></li>
-                {% endfor %}
-            </ul>
+            {% for product in member.products.all %}
+            <div class="product-item">
+                {% if product.photo %}
+                <img src="{{ product.photo.url }}" alt="" onclick="location='{% url 'products:read' product.pk %}'">
+                {% endif %}
+            </div>
+            {% endfor %}
         </div>
     </div>
 </div>
