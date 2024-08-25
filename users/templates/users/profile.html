@@ -3,9 +3,9 @@
 {% block content %}
 
 <div class="">
-    <h3 class="page-title text-center">Profile</h3>
+    <h5 class="form-container profile">Profile</h5>
     <div class="mb-2">
-        <div class="form-container row">
+        <div class="form-container row profile"> 
             <div class="col-md-4" style="position: relative;">
                 <img src="{{ member.profile_picture.url }}" style="width: 100px; height: 100px; border: 3px solid transparent; border-radius: 50%; background-image: linear-gradient(#fff, #fff), linear-gradient(to right, #560c7b 0%, #fe2aff 100%); background-origin: border-box; background-clip: content-box, border-box;">
                 {% if request.user == member %}
@@ -14,7 +14,7 @@
             </div>
             <div class="col-md-8" style="text-align: left;">
                 <div class="profile_content">
-                    유저: {{ member.username }}
+                    <span class="label">이름</span> <span class="value">{{ member.username }}</span>
                     {% if request.user != member %}
                         <form action="{% url 'users:follow' member.pk %}" method="POST">
                             {% csrf_token %}
@@ -27,25 +27,27 @@
                     {% endif %}
                 </div>
                 <div class="profile_content">
-                    가입일 {{ member.date_joined }}<br>
-                    게시물 {{ member.products|length }}
-                    팔로우 {{ member.followings.count }} 
-                    팔로워 {{ member.followers.count }}
+                    <span class="label">가입일</span> <span class="value">{{ member.date_joined }}</span>
                 </div>
                 <div class="profile_content">
-                    {{ member.email }}
+                    <span class="label">게시물</span> <span class="value">{{ member.products.all|length }}</span>
+                    <span class="label">팔로우</span> <span class="value">{{ member.followings.count }}</span>
+                    <span class="label">팔로워</span> <span class="value">{{ member.followers.count }}</span>
+                </div>
+                <div class="profile_content">
+                    <span class="label">이메일</span> <span class="value">{{ member.email }}</span>
                 </div>
             </div> 
         </div>
 
         <ul class="nav nav-underline justify-content-center m-3">
             {% if request.user == member %}
-            <li class="nav-item">
-                <a class="nav-link nav-link1" href="#" onclick="mves_page('1')">찜한 물건</a>
+            <li class="nav-item nav-item1" style="margin-left: -275px;">
+                <button class="btn btn-primary_like" onclick="mves_page('1')">내가 찜한 물건</button>
             </li>
             {% endif %}
-            <li class="nav-item">
-                <a class="nav-link nav-link2" href="#" onclick="mves_page('2')">올린 물건</a>
+            <li class="nav-item nav-item2">
+                <button class="btn btn-primary_sale" onclick="mves_page('2')">판매 중인 물건</button>
             </li>
         </ul>
 
@@ -99,12 +101,16 @@
 </div>
 {% endif %}
 
+
+<br>
 <script>
     mves_page(2)
+
     function mves_page(page){
         $('.nav-item').removeClass("active");
         $('.profile_page').removeClass("d-flex");
         $('.profile_page').removeClass("d-lg-none");
+
         if (page == '1'){
             $('.nav-item'+page).addClass("active");
             $('.profile_page'+page).addClass("d-flex");

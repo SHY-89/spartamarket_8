@@ -79,16 +79,23 @@
     background-color: #9C9E9E;
     margin: 5px;
     color: #fff;
-    padding: 6px 28px; /* 버튼 크기 줄이기 */
+    padding: 6px 28px; /* 버튼 크기 */
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 14px; /* 버튼 글씨 크기 줄이기 */
+    font-size: 14px; /* 버튼 글씨 크기 */
     text-align: center;
 }
 .delete-form .btn-delete.btn-updates:hover {
     background-color: #C62828;
 }
+
+.btn_like {
+
+}
+
+
+
 
 .form-container {
     max-width: 800px;
@@ -98,7 +105,78 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     text-align: center;
+    margin-top: 20px;
 }
+.profile {
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+h5.profile {
+    background-color: #fff;
+    box-shadow: none;
+    margin-top: -40px;
+    margin-bottom: -30px;
+    color: purple;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: left;
+}
+
+
+/* 찜한 물건, 올린 물건 텍스트 보라색으로 변경, 호버시 볼드체로, 밑줄은 삭제 */
+
+.nav-link {
+    color: rgb(158, 36, 158); 
+    text-decoration: none; 
+    font-weight: bold;
+}
+
+.nav-link.active {
+    color: rgb(100, 0, 100); 
+    font-weight: bold; 
+}
+
+.nav-link:hover {
+    color: rgb(221, 141, 241); 
+    font-weight: bold; 
+    text-decoration: none; 
+}
+
+/* 찜한 물건과 올린 물건 텍스트와 이미지 사이에 여백 추가 */
+.profile_page img {
+    margin-top: 70px; 
+}
+
+/* 프로필 제목과 정보 스타일링 */
+.profile_content {
+    margin-bottom: 2.5px; /* 각 항목 사이의 여백 추가 */
+}
+
+/* 프로필 항목 리스트 (이름, 가입일, 게시물, 팔로우, 팔로워, 이메일) */
+.profile_content span.label {
+    font-weight: 500;
+    color:#6a696b
+}
+
+/* 유저 정보 */
+.profile_content span.value {
+    font-weight: 550;
+    color: rgb(90, 17, 95);
+}
+
+/* 버튼 스타일 */
+.profile_content form input[type="submit"] {
+    font-weight: normal; /* 버튼의 기본 글씨 두께 */
+}
+
+
+
+
 
 .page-title {
     color: #560C7B;
@@ -297,10 +375,6 @@
 
 .btn-custom:hover {
     background-color: #AC92ED; /* 약간 어두운 보라색 */
-}
-
-.form-container {
-    margin-top: 20px;
 }
 
 /* 네비게이션 바 아래 텍스트 스타일 */
@@ -534,41 +608,77 @@
     margin-bottom: 10px; /* 댓글 간의 간격 조정 */
 }
 
+/* 내가 찜한 물건 */
+.btn-primary_like {
+    background-color: #e7d8f1; 
+    color: rgb(84, 38, 110); 
+    border: none; 
+    border-radius: 5px; 
+    padding: 7px 9px;
+    cursor: pointer; 
+    font-size: 15px; 
+    transition: background-color 0.3s ease; 
+    margin-right: 400px;
+}
 
-/* 댓글 작성 버튼 스타일 */
+.btn-primary_like:hover {
+    background-color: #65269c; 
+    color: #ffffff;
+}
+
+/* 판매중인 물건 */
+.btn-primary_sale {
+    background-color: #e7d8f1; 
+    color: rgb(84, 38, 110); 
+    border: none; 
+    border-radius: 5px; 
+    padding: 7px 9px;
+    cursor: pointer; 
+    font-size: 15px; 
+    transition: background-color 0.3s ease; 
+    margin-left: -407px;
+}
+
+.btn-primary_sale:hover {
+    background-color: #65269c; 
+    color: #ffffff;
+}
+
+
+/* 댓글 작성 버튼 */
 .logout-delete-btn {
     position: absolute;
-    bottom: -3px; /* 폼 하단과 버튼 간격 조정 */
-    right: 78px; /* 폼 우측과 버튼 간격 조정 */
-    width: 55px; /* 버튼 너비 조정 */
+    bottom: -3px; /* 폼 하단과 버튼 간격 */
+    right: 78px; /* 폼 우측과 버튼 간격 */
+    width: 55px; /* 버튼 너비 */
     margin: -33px;
 }
 
 .comment-date {
-    color: #888; /* 옅은 회색 */
-    font-size: 0.9em; /* 글자 크기 조정 */
+    color: #888; 
+    font-size: 0.9em; 
 }
 
-/* 삭제 버튼 스타일 */
+/* 삭제 버튼 */
 .custom-delete-btn {
-    background-color: #d9534f; /* 빨간색 배경 */
-    color: white; /* 흰색 텍스트 */
-    border: none; /* 테두리 없음 */
-    border-radius: 4px; /* 모서리 둥글게 */
-    padding: 4px 8px; /* 안쪽 여백: 크기를 줄임 */
-    cursor: pointer; /* 마우스 커서 포인터로 변경 */
-    font-size: 12px; /* 폰트 크기를 작게 설정 */
-    transition: background-color 0.3s ease; /* 배경색 전환 효과 */
+    background-color: #d9534f; 
+    color: white; 
+    border: none; 
+    border-radius: 4px; 
+    padding: 4px 8px; 
+    cursor: pointer; 
+    font-size: 12px; 
+    transition: background-color 0.3s ease; 
 }
 
-/* 삭제 버튼 호버 효과 */
+/* 삭제 버튼 호버 */
 .custom-delete-btn:hover {
-    background-color: #c9302c; /* 호버 시 어두운 빨간색 */
+    background-color: #c9302c;
 }
 
 .heart_btn {
     background: none;
     border : 0px;
-    color: #ff171b;
-    font-size: 27px;
+    color: #ea2442;
+    font-size: 26px;
 }
