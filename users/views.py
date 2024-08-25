@@ -37,5 +37,3 @@ def update_profile(request):
         return redirect("users:profile", username=request.user.username)
     return redirect("accounts:login")
 
-def update():
-    pass
