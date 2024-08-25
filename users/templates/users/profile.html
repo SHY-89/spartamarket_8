@@ -6,8 +6,11 @@
     <h3 class="page-title text-center">Profile</h3>
     <div class="mb-2">
         <div class="form-container row">
-            <div class="col-md-4">
+            <div class="col-md-4" style="position: relative;">
                 <img src="{{ member.profile_picture.url }}" style="width: 100px; height: 100px; border: 3px solid transparent; border-radius: 50%; background-image: linear-gradient(#fff, #fff), linear-gradient(to right, #560c7b 0%, #fe2aff 100%); background-origin: border-box; background-clip: content-box, border-box;">
+                {% if request.user == member %}
+                <i class="fa-solid fa-plus" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" style="position: absolute; border: 3px solid #fff; background: #b67cc1; bottom: 2px; left: 146px; padding: 5px 5px; border-radius: 100%; color: #fff; cursor: pointer;"></i>
+                {% endif %}
             </div>
             <div class="col-md-8" style="text-align: left;">
                 <div class="profile_content">
@@ -73,6 +76,29 @@
     </div>
 </div>
 
+{% if request.user == member %}
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalCenterTitle">프로필 사진 변경</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'users:update_profile' %}" method="POST" enctype="multipart/form-data" id="modi_update">
+                    {% csrf_token %}
+                    <input type="file" name="profile_picture" id="modi_profile">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-primary" onclick="updates()">변경</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
 <script>
     mves_page(2)
     function mves_page(page){
@@ -89,5 +115,9 @@
             $('.profile_page1').addClass("d-lg-none");
         }
     }
+    function updates(){
+        $('#modi_update').submit()
+    }
 </script>
+
 {% endblock content %}
