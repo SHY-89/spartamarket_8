@@ -124,6 +124,7 @@ def comment_create(request, pk):
         comments = Comment.objects.filter(product=product).order_by('-created_at')
         comments_data = [
             {
+                'id': comment.id,
                 'text': comment.text,
                 'author': comment.author.username,
                 'created_at': comment.created_at.isoformat()  # ISO 8601 형식으로

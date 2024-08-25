@@ -2,42 +2,41 @@
 
 {% block content %}
 <title>{{ product.title }}</title>
-<div class="product-detail-container read-page">
+<div class="product-detail-container read-page" style="position: relative; max-width: 100%;">
     {% if product.photo %}
     <div class="product-image">
         <a class="back-btn" href="{% url 'index' %}">목록으로</a>
-        <img src="{{ product.photo.url }}" alt="{{ product.photo }}" class="detail_img">
+        <img src="{{ product.photo.url }}" alt="{{ product.photo }}" class="detail_img" style="height: auto; max-height: 100%;">
     </div>
     {% endif %}
     <div class="product-info">
         <h1>{{ product.title }}</h1>
         <p>{{ product.content }}</p>
-
-        <div class="product-actions">
-            {% if product.uuid.pk == request.user.pk %}
-            <div class="action-buttons">
-                <a class="btn edit-btn" href="{% url 'products:update' product.pk %}">수정하기</a>
-                <div class="delete-form">
-                    <form action="{% url 'products:delete' product.pk %}" method="POST">
-                        {% csrf_token %}
-                        <button type="submit" class="btn-delete">삭제</button>
-                    </form>
-                </div>
-            
-                
-            </div>
-            {% else %}
-                <form action="{% url 'products:like' product.pk %}" method="POST">
-                    {% csrf_token %}
-                    {% if request.user in product.like_users.all %}
-                        <input type="submit" value="좋아요 취소하기">
-                    {% else %}
-                        <input type="submit" value="좋아요 하기">
-                    {% endif %}
-                </form>
-            {% endif %}
-        </div>
         <a href="{% url 'users:profile' product.uuid.username %}"><p class="product-author">작성자: {{ product.uuid.username }} {{ product.created_at|date:"y.m.d" }}</p></a>
+    </div>
+    <div class="product-actions">
+        {% if product.uuid.pk == request.user.pk %}
+        <div class="action-buttons">
+            <a class="btn edit-btn" href="{% url 'products:update' product.pk %}">수정하기</a>
+            <div class="delete-form">
+                <form action="{% url 'products:delete' product.pk %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-delete">삭제</button>
+                </form>
+            </div>
+        
+            
+        </div>
+        {% else %}
+            <form action="{% url 'products:like' product.pk %}" method="POST">
+                {% csrf_token %}
+                {% if request.user in product.like_users.all %}
+                    <input type="submit" value="좋아요 취소하기">
+                {% else %}
+                    <input type="submit" value="좋아요 하기">
+                {% endif %}
+            </form>
+        {% endif %}
     </div>
 </div>
 
@@ -62,7 +61,7 @@
                 success: function(response) {
                     var commentsList = $('.comment-list');
                     commentsList.empty(); 
-
+                    console.log(response)
                     
                     response.comments.forEach(function(comment) {
                         var createdAt = new Date(comment.created_at);
@@ -72,7 +71,7 @@
                                             (createdAt.getHours() % 12 || 12).toString().padStart(2, '0') + ':' +
                                             createdAt.getMinutes().toString().padStart(2, '0') + 
                                             (createdAt.getHours() >= 12 ? 'PM' : 'AM');
-                        commentsList.append('<li data-id="' + comment.id + '"><p>' + comment.text + ' | ' + comment.author + ' | <span class="comment-date">' + formattedDate + '</span> <button class="delete-comment-btn">삭제</button></p></li>');
+                        commentsList.append('<li data-id="' + comment.id + '"><p>' + comment.text + ' | ' + comment.author + ' | <span class="comment-date">' + formattedDate + '</span> <span class="delete-form"><button class="btn-delete comment-delete-btn" style="padding: 3px 8px;">삭제</button></span></p></li>');
                     });
 
                     form[0].reset(); 
@@ -107,9 +106,9 @@
                 <p>
                     {{ comment.text }} | {{ comment.author.username }} | 
                     <span class="comment-date">{{ comment.created_at|date:"d.m.y H:i" }}</span>
-                    <spa class="delete-form">
+                    <span class="delete-form">
                         <button class="btn-delete comment-delete-btn" style="padding: 3px 8px;">삭제</button>
-                    </spa>
+                    </span>
                 </p>
             </li>
         {% endfor %}
