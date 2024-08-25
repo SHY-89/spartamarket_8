@@ -44,7 +44,7 @@
                     </ul>
                     <form action="{% url 'accounts:logout' %}" method="POST" style="display: inline-block;vertical-align: middle;">
                         {% csrf_token %}
-                        <button type="submit" class="logout-delete-btn">로그아웃</button>
+                        <button type="submit" class="logout_button">로그아웃</button>
                     </form>
                 </div>
                 {% else %}
