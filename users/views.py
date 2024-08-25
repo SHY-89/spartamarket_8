@@ -36,3 +36,6 @@ def update_profile(request):
             forms.save()
         return redirect("users:profile", username=request.user.username)
     return redirect("accounts:login")
+
+def update():
+    pass
