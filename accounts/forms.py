@@ -72,3 +72,9 @@ class CustomUserChangeForm(UserChangeForm):
             "last_name": "닉네임",
             "email": "email",
         }
+
+
+class UserProfile(forms.ModelForm):
+    class Meta:
+        model = get_user_model()
+        fields = ("profile_picture",)
