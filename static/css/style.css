@@ -497,12 +497,12 @@
 .comment-form-container {
     position: relative;
     margin-top: 10px; /* 폼과 버튼 간격 조정 */
+    text-align: left
 }
 
 .custom-comment-textarea {
-    width: calc(100% - 80px); /* 버튼의 너비를 고려한 텍스트 영역 너비 */
+    width: calc(100% - 45px); /* 버튼의 너비를 고려한 텍스트 영역 너비 */
     margin-right: 10px;
-    margin-top: 10px;
 }
 
 .logout-delete-btn {
@@ -539,3 +539,19 @@
     font-size: 0.9em; /* 글자 크기 조정 */
 }
 
+/* 삭제 버튼 스타일 */
+.custom-delete-btn {
+    background-color: #d9534f; /* 빨간색 배경 */
+    color: white; /* 흰색 텍스트 */
+    border: none; /* 테두리 없음 */
+    border-radius: 4px; /* 모서리 둥글게 */
+    padding: 4px 8px; /* 안쪽 여백: 크기를 줄임 */
+    cursor: pointer; /* 마우스 커서 포인터로 변경 */
+    font-size: 12px; /* 폰트 크기를 작게 설정 */
+    transition: background-color 0.3s ease; /* 배경색 전환 효과 */
+}
+
+/* 삭제 버튼 호버 효과 */
+.custom-delete-btn:hover {
+    background-color: #c9302c; /* 호버 시 어두운 빨간색 */
+}
