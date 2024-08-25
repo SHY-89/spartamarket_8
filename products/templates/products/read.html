@@ -27,19 +27,80 @@
             {% endif %}
         </div>
         <p class="product-author">작성자: {{ product.uuid.username }} {{ product.created_at|date:"y.m.d" }}</p>
-
     </div>
 </div>
+
 <script>
     $(function(){
         $.ajax({
             url : "{% url 'products:update_cnt' %}",
-	        type : 'POST',
+            type : 'POST',
             data : {csrfmiddlewaretoken: "{{ csrf_token }}", pk: '{{ product.pk }}'},
             success : function(data, jqXHR, textStatus) {
                 console.log(data)
             }
         });
-    })
+
+        $('#comment-form').on('submit', function(event){
+            event.preventDefault(); 
+            var form = $(this);
+            $.ajax({
+                url: form.attr('action'),
+                type: form.attr('method'),
+                data: form.serialize(),
+                success: function(response) {
+                    var commentsList = $('.comment-list');
+                    commentsList.empty(); 
+
+                    
+                    response.comments.forEach(function(comment) {
+                        var createdAt = new Date(comment.created_at);
+                        var formattedDate = createdAt.getDate().toString().padStart(2, '0') + '.' +
+                                            (createdAt.getMonth() + 1).toString().padStart(2, '0') + '.' +
+                                            createdAt.getFullYear().toString().slice(-2) + ' ' +
+                                            (createdAt.getHours() % 12 || 12).toString().padStart(2, '0') + ':' +
+                                            createdAt.getMinutes().toString().padStart(2, '0') + 
+                                            (createdAt.getHours() >= 12 ? 'PM' : 'AM');
+                        commentsList.prepend('<li data-id="' + comment.id + '"><p>' + comment.text + ' | ' + comment.author + ' | <span class="comment-date">' + formattedDate + '</span> <button class="delete-comment-btn">삭제</button></p></li>');
+                    });
+
+                    form[0].reset(); 
+                }
+            });
+        });
+
+
+        $(document).on('click', '.delete-comment-btn', function() {
+            var commentElement = $(this).closest('li');
+            var commentId = commentElement.data('id');
+
+            $.ajax({
+                url: "{% url 'products:delete_comment' 0 %}".replace('0', commentId), 
+                type: 'POST',
+                data: {csrfmiddlewaretoken: "{{ csrf_token }}"},
+                success: function() {
+                    commentElement.remove();
+                }
+            });
+        });
+    });
 </script>
+
+<br>
+<br>
+<hr>
+<div class="comment-section">
+    <ul class="comment-list">
+        {% for comment in comments %}
+            <li data-id="{{ comment.id }}">
+                <p>{{ comment.text }} | {{ comment.author.username }} | <span class="comment-date">{{ comment.created_at|date:"d.m.y H:i" }}</span> <button class="delete-comment-btn">삭제</button></p>
+            </li>
+        {% endfor %}
+    </ul>
+    <form action="{% url 'products:comment_create' product.pk %}" method="POST" id="comment-form" class="comment-form-container">
+        {% csrf_token %}
+        <textarea name="text" placeholder="댓글을 입력하세요." class="custom-comment-textarea"></textarea>
+        <button type="submit" class="logout-delete-btn">작성</button>
+    </form>
+</div>
 {% endblock content %}

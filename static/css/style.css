@@ -206,6 +206,7 @@
     gap: 40px;
     justify-content: center;
 }
+
 .product-item {
     width: 300px;
     height: 375px;
@@ -335,6 +336,22 @@
     font-weight: bold;
 }
 
+.logout_button {
+    background-color: #E6E6FA;
+    color: #6a0dad; 
+    border: 1px solid #6a0dad; 
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.logout_button:hover {
+    background-color: #6a0dad; 
+    color: white; 
+}
+
 .logout-delete-btn:hover {
     background-color: #A558E2; 
     color: white; 
@@ -431,6 +448,7 @@
     display: flex;
     gap: 50px; /* 버튼 간격 조정 */
 }
+
 .read-page .btn {
     background-color: #560C7B; /* 포인트 컬러 */
     color: white;
@@ -440,12 +458,18 @@
     font-size: 14px; /* 버튼 글씨 크기 줄이기 */
     text-align: center;
 }
+
 .read-page .edit-btn {
     color: #570B7B;
     background-color: #E6E6FA; /* 포인트 컬러 */
     margin: 5px;
 }
-.read-page .edit-btn:hover { background-color: #560C7B; color: #fff; }
+
+.read-page .edit-btn:hover {
+     background-color: #560C7B; 
+     color: #fff;
+}
+
 .read-page .delete-form .btn-delete {
     background-color: #9C9E9E;
     margin: 5px;
@@ -460,3 +484,57 @@
 .read-page .delete-form:hover .btn-delete {
     background-color: #C62828;
 }
+
+
+/* 댓글 섹션 */
+.comment-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.comment-form-container {
+    position: relative;
+    margin-top: 10px; /* 폼과 버튼 간격 조정 */
+}
+
+.custom-comment-textarea {
+    width: calc(100% - 80px); /* 버튼의 너비를 고려한 텍스트 영역 너비 */
+    margin-right: 10px;
+}
+
+.logout-delete-btn {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 80px; /* 버튼의 너비 조정 */
+}
+
+/* 댓글 목록 왼쪽 정렬 */
+.comment-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.comment-list li {
+    text-align: left; /* 댓글 왼쪽 정렬 */
+    margin-bottom: 10px; /* 댓글 간의 간격 조정 */
+}
+
+
+/* 댓글 작성 버튼 스타일 */
+.logout-delete-btn {
+    position: absolute;
+    bottom: -3px; /* 폼 하단과 버튼 간격 조정 */
+    right: 78px; /* 폼 우측과 버튼 간격 조정 */
+    width: 55px; /* 버튼 너비 조정 */
+    margin: -33px;
+}
+
+.comment-date {
+    color: #888; /* 옅은 회색 */
+    font-size: 0.9em; /* 글자 크기 조정 */
+}
+
