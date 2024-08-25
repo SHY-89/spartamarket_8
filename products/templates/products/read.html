@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<title>{{ product.title }}</title>
+<div class="product-detail-container read-page">
+    {% if product.photo %}
+    <div class="product-image">
+        <a class="back-btn" href="{% url 'index' %}">목록으로</a>
+        <img src="{{ product.photo.url }}" alt="{{ product.photo }}" class="detail_img">
+    </div>
+    {% endif %}
+    <div class="product-info">
+        <h1>{{ product.title }}</h1>
+        <p>{{ product.content }}</p>
+
+        <div class="product-actions">
+            {% if product.uuid.pk == request.user.pk %}
+            <div class="action-buttons">
+                <a class="btn edit-btn" href="{% url 'products:update' product.pk %}">수정하기</a>
+                <div class="delete-form">
+                    <form action="{% url 'products:delete' product.pk %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-delete">삭제</button>
+                    </form>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        <p class="product-author">작성자: {{ product.uuid.username }} {{ product.created_at|date:"y.m.d" }}</p>
+
+    </div>
+</div>
+<script>
+    $(function(){
+        $.ajax({
+            url : "{% url 'products:update_cnt' %}",
+	        type : 'POST',
+            data : {csrfmiddlewaretoken: "{{ csrf_token }}", pk: '{{ product.pk }}'},
+            success : function(data, jqXHR, textStatus) {
+                console.log(data)
+            }
+        });
+    })
+</script>
+{% endblock content %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="form-container">
+    <h1 class="page-title">글 수정하기</h1>
+    
+    <form action="" method="POST" enctype="multipart/form-data" class="product-form">
+        {% csrf_token %}
+        {{ forms.as_p }}
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">수정 완료</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}

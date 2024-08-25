@@ -2,19 +2,27 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ProductForm
 from .models import Product
 from django.views.decorators.http import require_http_methods,require_POST
-
+from django.db.models import Q
+from django.http import JsonResponse
 
 
 def index(request):
-    index = Product.objects.all()
+    serch_text = request.GET.get('serch_text') or ''
+    if serch_text:
+        index = Product.objects.filter(Q(title__icontains=serch_text)|Q(content__icontains=serch_text)|Q(uuid__username__icontains=serch_text)).order_by('-pk')
+    else:
+        index = Product.objects.all()
+    
     context = {
         "index" : index,
     }
-    return render(request, "index.html", context)
+    return render(request, "products/index.html", context)
 
 
 @ require_http_methods(["GET", "POST"])
 def create(request):
+    if not request.user.is_authenticated:
+        return redirect("accounts:login")
     if request.method == 'POST':
         forms = ProductForm(request.POST, request.FILES)
         if forms.is_valid():
@@ -28,16 +36,15 @@ def create(request):
         
     context = { "forms" : forms
         }
-    return render(request, "create.html", context)
+    return render(request, "products/create.html", context)
 
 
 def read(request, pk):
     product = get_object_or_404(Product,pk=pk)
     context = {
-        
         'product': product
     }
-    return render(request, "read.html", context)
+    return render(request, "products/read.html", context)
 
 
 @ require_http_methods(["GET", "POST"])
@@ -50,9 +57,6 @@ def update(request, pk):
             if forms.is_valid():
                 forms.save()
             return redirect("products:read", pk)
-        
-    
-    
     else:
         forms = ProductForm(instance=product)
     context = {
@@ -60,7 +64,7 @@ def update(request, pk):
         'forms':forms
     }
     
-    return render(request, "update.html", context)
+    return render(request, "products/update.html", context)
 
 
 @ require_POST
@@ -69,15 +73,6 @@ def delete(request, pk):
     if product.uuid.pk == request.user.pk:
         product.delete()
     return redirect("index")
-
-
-
-    # like_user = models.Foreingkey(
-    #     settings.AUTH_USER_MODEL,
-    #     on_delete=models.CASCADE,
-    #     related_name="like_products",
-    #     null=True 
-    # )
 
 @require_POST
 def like(request, pk):
@@ -89,3 +84,15 @@ def like(request, pk):
             product.like_users.add(request.user)
         return redirect("products:read", pk)
     return redirect("accounts:login")
+
+
+@ require_POST
+def update_cnt(request):
+    pk = request.POST.get('pk')
+    product = get_object_or_404(Product, pk=pk)
+    product.cnt += 1
+    product.save()
+    context = {
+        "data": '200',
+    }
+    return JsonResponse(context)
