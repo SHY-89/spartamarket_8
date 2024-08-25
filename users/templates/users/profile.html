@@ -3,43 +3,71 @@
 {% block content %}
 
 <div class="">
-    <h1 class="page-title">프로필</h1>
-    <div class="row mb-2">
-        <div class="col-md-5 form-container">
-            <img src="{{ member.profile_picture.url }}"> <br>
-            유저: {{ member.username }} <br>
-            가입일: {{ member.date_joined }} <br>
-
-            팔로우: {{ member.followings.count }} <br>
-            팔로워: {{ member.followers.count }}
-
-            {% if request.user != member %}
-                <form action="{% url 'users:follow' member.pk %}" method="POST">
-                    {% csrf_token %}
-                    {% if request.user in member.followers.all %}
-                        <input type="submit" value="언팔로우 하기">
-                    {% else %}
-                        <input type="submit" value="팔로우 하기">
+    <h1 class="page-title text-center">프로필</h1>
+    <div class="mb-2">
+        <div class="form-container row">
+            <div class="col-md-4">
+                <img src="{{ member.profile_picture.url }}" style="width: 100px; height: 100px; border: 3px solid transparent; border-radius: 50%; background-image: linear-gradient(#fff, #fff), linear-gradient(to right, #560c7b 0%, #fe2aff 100%); background-origin: border-box; background-clip: content-box, border-box;">
+            </div>
+            <div class="col-md-8" style="text-align: left;">
+                <div class="profile_content">
+                    유저: {{ member.username }}
+                    {% if request.user != member %}
+                        <form action="{% url 'users:follow' member.pk %}" method="POST">
+                            {% csrf_token %}
+                            {% if request.user in member.followers.all %}
+                                <input type="submit" value="언팔로우 하기">
+                            {% else %}
+                                <input type="submit" value="팔로우 하기">
+                            {% endif %}
+                        </form>
                     {% endif %}
-                </form>
-            {% endif %}
+                </div>
+                <div class="profile_content">
+                    가입일 {{ member.date_joined }}<br>
+                    게시물 {{ member.products|length }}
+                    팔로우 {{ member.followings.count }} 
+                    팔로워 {{ member.followers.count }}
+                </div>
+                <div class="profile_content">
+                    {{ member.email }}
+                </div>
+            </div> 
         </div>
-        <div class="col-md-5 form-container">
+
+        <ul class="nav nav-underline justify-content-center">
+            {% if request.user == member %}
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">찜한 물건</a>
+            </li>
+            {% endif %}
+            <li class="nav-item">
+                <a class="nav-link" href="#">올린 물건</a>
+            </li>
+        </ul>
         {% if request.user == member %}
-        <h2>내가 찜한 물건들</h2>
-        <ul>
+        <div class="product-list">
             {% for product in member.like_products.all %}
-            <li><a href="{% url 'products:read' product.pk %}">{{ product.title }}</a></li>
+            <div class="product-item">
+                {% if product.photo %}
+                <div class="product-image" style="background-image: url({{ product.photo.url }});" onclick="location='{% url 'products:read' product.pk %}'">
+                    
+                </div>
+                {% endif %}
+                <div class="product-title">
+                    <a href="{% url 'products:read' product.pk %}">{{ product.title }}</a>
+                </div>
+            </div>
             {% endfor %}
-        </ul>
+        </div>
         {% endif %}
-        
-        <h2>올린 물건들</h2>
-        <ul>
-            {% for product in member.products.all %}
-            <li><a href="{% url 'products:read' product.pk %}">{{ product.title }}</a></li>
-            {% endfor %}
-        </ul>
+        <div class="form-container row">
+            <ul>
+                {% for product in member.products.all %}
+                <li><a href="{% url 'products:read' product.pk %}">{{ product.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 </div>
 {% endblock content %}
