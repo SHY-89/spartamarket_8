@@ -14,8 +14,8 @@
         <p>{{ product.content }}</p>
         <a href="{% url 'users:profile' product.uuid.username %}"><p class="product-author">작성자: {{ product.uuid.username }} {{ product.created_at|date:"y.m.d" }}</p></a>
     </div>
+    {% if product.uuid.pk == request.user.pk %}
     <div class="product-actions">
-        {% if product.uuid.pk == request.user.pk %}
         <div class="action-buttons">
             <a class="btn edit-btn" href="{% url 'products:update' product.pk %}">수정하기</a>
             <div class="delete-form">
@@ -24,20 +24,20 @@
                     <button type="submit" class="btn-delete">삭제</button>
                 </form>
             </div>
-        
-            
         </div>
-        {% else %}
-            <form action="{% url 'products:like' product.pk %}" method="POST">
-                {% csrf_token %}
-                {% if request.user in product.like_users.all %}
-                    <input type="submit" value="좋아요 취소하기">
-                {% else %}
-                    <input type="submit" value="좋아요 하기">
-                {% endif %}
-            </form>
-        {% endif %}
     </div>
+    {% else %}
+    <div class="product_like">
+        <form action="{% url 'products:like' product.pk %}" method="POST">
+            {% csrf_token %}
+            {% if request.user in product.like_users.all %}
+                <button type="submit" class="heart_btn" ><i class="fa-solid fa-heart"></i></button>
+            {% else %}
+                <button type="submit" class="heart_btn" ><i class="fa-regular fa-heart"></i></button>
+            {% endif %}
+        </form>
+    </div>
+    {% endif %}
 </div>
 
 <script>

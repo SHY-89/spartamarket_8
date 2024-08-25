@@ -451,6 +451,13 @@
     display: flex;
     gap: 50px; /* 버튼 간격 조정 */
 }
+.product_like {
+    position: absolute;
+    top: 10px; /* 상단 여백 */
+    right: 15px; /* 오른쪽 여백 */
+    display: flex;
+    gap: 50px; /* 버튼 간격 조정 */
+}
 
 .read-page .btn {
     background-color: #560C7B; /* 포인트 컬러 */
@@ -557,4 +564,11 @@
 /* 삭제 버튼 호버 효과 */
 .custom-delete-btn:hover {
     background-color: #c9302c; /* 호버 시 어두운 빨간색 */
+}
+
+.heart_btn {
+    background: none;
+    border : 0px;
+    color: #ff171b;
+    font-size: 27px;
 }
