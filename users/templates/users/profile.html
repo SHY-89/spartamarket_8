@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <img src="{{ member.profile_picture.url }}"> <br>
+    
+    유저: {{ member.username }} <br>
+    가입일: {{ member.date_joined }} <br>
+
+    팔로우: {{ member.followings.count }} <br>
+    팔로워: {{ member.followers.count }}
+
+    {% if request.user != member %}
+        <form action="{% url 'users:follow' member.pk %}" method="POST">
+            {% csrf_token %}
+            {% if request.user in member.followers.all %}
+                <input type="submit" value="언팔로우 하기">
+            {% else %}
+                <input type="submit" value="팔로우 하기">
+            {% endif %}
+        </form>
+    {% endif %}
+
+    {% if request.user == member %}
+    <h2>내가 찜한 물건들</h2>
+    <ul>
+        {% for product in member.like_products.all %}
+        <li><a href="{% url 'products:read' product.pk %}">{{ product.title }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    
+    <h2>올린 물건들</h2>
+    <ul>
+        {% for product in member.products.all %}
+        <li><a href="{% url 'products:read' product.pk %}">{{ product.title }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock content %}
