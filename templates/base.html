@@ -66,6 +66,12 @@
             <a class="btn create-btn" href="{% url 'products:create' %}" style="padding: 9px 20px;background-color: #560C7B;color: white;text-decoration: none;border-radius: 5px;border: 0;">등록하기</a>
             <br><br>
         </div>
+        <div class="">
+            <select name="orders" id="orders" onchange="order_by()">
+                <option value="date" {% if request.GET.orders == 'date'%}selected{% endif %}>최신순</option>
+                <option value="popularity" {% if request.GET.orders == 'popularity'%}selected{% endif %}>인기순</option>
+            </select>
+        </div>
     </div>
 
     <main class="container" style="padding: 0px">
@@ -113,7 +119,13 @@
         }
     }
     function serchs(){
+        let serch_box = document.getElementById('serch_box');
         location.href = '{% url "index" %}?serch_text='+serch_box.value;
+    }
+    function order_by(){
+        let serch_box = document.getElementById('serch_box');
+        let order_box = document.getElementById('orders');
+        location.href = '{% url "index" %}?serch_text='+serch_box.value+'&orders='+order_box.value;
     }
 </script>
 </body>

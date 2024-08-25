@@ -2,16 +2,25 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ProductForm
 from .models import Product
 from django.views.decorators.http import require_http_methods,require_POST
-from django.db.models import Q
+from django.db.models import Count, Q
 from django.http import JsonResponse
 
 
 def index(request):
     serch_text = request.GET.get('serch_text') or ''
-    if serch_text:
-        index = Product.objects.filter(Q(title__icontains=serch_text)|Q(content__icontains=serch_text)|Q(uuid__username__icontains=serch_text)).order_by('-pk')
+    orders = request.GET.get('orders') or 'date'
+    
+    
+    if orders == 'date':
+        if serch_text:
+            index = Product.objects.filter(Q(title__icontains=serch_text)|Q(content__icontains=serch_text)|Q(uuid__username__icontains=serch_text)).order_by("-pk")
+        else:
+            index = Product.objects.all().order_by('-pk')
     else:
-        index = Product.objects.all()
+        if serch_text:
+            index = Product.objects.filter(Q(title__icontains=serch_text)|Q(content__icontains=serch_text)|Q(uuid__username__icontains=serch_text)).annotate(like_users_count=Count('like_users')).order_by('-like_users_count',"-pk")
+        else:
+            index = Product.objects.all().annotate(like_users_count=Count('like_users')).order_by('-like_users_count', '-pk')
     
     context = {
         "index" : index,
