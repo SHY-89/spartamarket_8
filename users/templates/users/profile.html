@@ -35,7 +35,7 @@
             </div> 
         </div>
 
-        <ul class="nav nav-underline justify-content-center">
+        <ul class="nav nav-underline justify-content-center m-3">
             {% if request.user == member %}
             <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#">찜한 물건</a>
@@ -45,26 +45,34 @@
                 <a class="nav-link" href="#">올린 물건</a>
             </li>
         </ul>
+
         {% if request.user == member %}
-        <div class="product-list">
-            {% for product in member.like_products.all %}
-            <div class="product-item">
-                {% if product.photo %}
-                <img src="{{ product.photo.url }}" alt="" onclick="location='{% url 'products:read' product.pk %}'">
-                {% endif %}
+        <div class="d-flex justify-content-center">
+            <div class="row">
+                {% for product in member.like_products.all %}
+                    {% if product.photo %}
+                    <div class="col-md-3">
+                        <img src="{{ product.photo.url }}" alt="" onclick="location='{% url 'products:read' product.pk %}'" style="width: 80%; cursor: pointer;">
+                    </div>
+                    {% endif %}
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
         {% endif %}
-        <div class="form-container row">
-            {% for product in member.products.all %}
-            <div class="product-item">
-                {% if product.photo %}
-                <img src="{{ product.photo.url }}" alt="" onclick="location='{% url 'products:read' product.pk %}'">
-                {% endif %}
+        <div class="d-flex justify-content-center">
+            <div class="row">
+                {% for product in member.products.all %}
+                    {% if product.photo %}
+                    <div class="col-md-3">
+                        <img src="{{ product.photo.url }}" alt="" onclick="location='{% url 'products:read' product.pk %}'" style="width: 80%; cursor: pointer;">
+                    </div>
+                    {% endif %}
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
     </div>
 </div>
+<javascipt>
+
+</javascipt>
 {% endblock content %}
