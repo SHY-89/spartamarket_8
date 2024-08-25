@@ -502,6 +502,7 @@
 .custom-comment-textarea {
     width: calc(100% - 80px); /* 버튼의 너비를 고려한 텍스트 영역 너비 */
     margin-right: 10px;
+    margin-top: 10px;
 }
 
 .logout-delete-btn {
