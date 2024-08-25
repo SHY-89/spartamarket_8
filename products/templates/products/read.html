@@ -72,7 +72,7 @@
                                             (createdAt.getHours() % 12 || 12).toString().padStart(2, '0') + ':' +
                                             createdAt.getMinutes().toString().padStart(2, '0') + 
                                             (createdAt.getHours() >= 12 ? 'PM' : 'AM');
-                        commentsList.prepend('<li data-id="' + comment.id + '"><p>' + comment.text + ' | ' + comment.author + ' | <span class="comment-date">' + formattedDate + '</span> <button class="delete-comment-btn">삭제</button></p></li>');
+                        commentsList.append('<li data-id="' + comment.id + '"><p>' + comment.text + ' | ' + comment.author + ' | <span class="comment-date">' + formattedDate + '</span> <button class="delete-comment-btn">삭제</button></p></li>');
                     });
 
                     form[0].reset(); 
@@ -81,7 +81,7 @@
         });
 
 
-        $(document).on('click', '.delete-comment-btn', function() {
+        $(document).on('click', '.comment-delete-btn', function() {
             var commentElement = $(this).closest('li');
             var commentId = commentElement.data('id');
 
@@ -100,11 +100,17 @@
 <br>
 <br>
 <hr>
-<div class="comment-section">
+<div class="comment-section read-page">
     <ul class="comment-list">
         {% for comment in comments %}
             <li data-id="{{ comment.id }}">
-                <p>{{ comment.text }} | {{ comment.author.username }} | <span class="comment-date">{{ comment.created_at|date:"d.m.y H:i" }}</span> <button class="delete-comment-btn">삭제</button></p>
+                <p>
+                    {{ comment.text }} | {{ comment.author.username }} | 
+                    <span class="comment-date">{{ comment.created_at|date:"d.m.y H:i" }}</span>
+                    <spa class="delete-form">
+                        <button class="btn-delete comment-delete-btn" style="padding: 3px 8px;">삭제</button>
+                    </spa>
+                </p>
             </li>
         {% endfor %}
     </ul>
