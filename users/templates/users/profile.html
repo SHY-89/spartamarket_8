@@ -38,16 +38,16 @@
         <ul class="nav nav-underline justify-content-center m-3">
             {% if request.user == member %}
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">찜한 물건</a>
+                <a class="nav-link nav-link1" href="#" onclick="mves_page('1')">찜한 물건</a>
             </li>
             {% endif %}
             <li class="nav-item">
-                <a class="nav-link" href="#">올린 물건</a>
+                <a class="nav-link nav-link2" href="#" onclick="mves_page('2')">올린 물건</a>
             </li>
         </ul>
 
         {% if request.user == member %}
-        <div class="d-flex justify-content-center">
+        <div class="d-lg-none justify-content-center profile_page profile_page1">
             <div class="row">
                 {% for product in member.like_products.all %}
                     {% if product.photo %}
@@ -59,7 +59,7 @@
             </div>
         </div>
         {% endif %}
-        <div class="d-flex justify-content-center">
+        <div class="d-lg-none justify-content-center profile_page profile_page2">
             <div class="row">
                 {% for product in member.products.all %}
                     {% if product.photo %}
@@ -72,7 +72,22 @@
         </div>
     </div>
 </div>
-<javascipt>
 
-</javascipt>
+<script>
+    mves_page(2)
+    function mves_page(page){
+        $('.nav-item').removeClass("active");
+        $('.profile_page').removeClass("d-flex");
+        $('.profile_page').removeClass("d-lg-none");
+        if (page == '1'){
+            $('.nav-item'+page).addClass("active");
+            $('.profile_page'+page).addClass("d-flex");
+            $('.profile_page2').addClass("d-lg-none");
+        }else{
+            $('.nav-item'+page).addClass("active");
+            $('.profile_page'+page).addClass("d-flex");
+            $('.profile_page1').addClass("d-lg-none");
+        }
+    }
+</script>
 {% endblock content %}
