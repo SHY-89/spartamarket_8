@@ -12,16 +12,16 @@
                 <i class="fa-solid fa-plus" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" style="position: absolute; border: 3px solid #fff; background: #b67cc1; bottom: 2px; left: 146px; padding: 5px 5px; border-radius: 100%; color: #fff; cursor: pointer;"></i>
                 {% endif %}
             </div>
-            <div class="col-md-8" style="text-align: left;">
+            <div class="col-md-8" style="text-align: left; position: relative;">
                 <div class="profile_content">
                     <span class="label">이름</span> <span class="value">{{ member.username }}</span>
                     {% if request.user != member %}
-                        <form action="{% url 'users:follow' member.pk %}" method="POST">
+                        <form action="{% url 'users:follow' member.pk %}" method="POST" id="follow-form" class="product_like">
                             {% csrf_token %}
                             {% if request.user in member.followers.all %}
-                                <input type="submit" value="언팔로우 하기">
+                                <button type="submit" class="heart_btn" ><i class="fa-solid fa-heart"></i></button>
                             {% else %}
-                                <input type="submit" value="팔로우 하기">
+                                <button type="submit" class="heart_btn" ><i class="fa-regular fa-heart"></i></button>
                             {% endif %}
                         </form>
                     {% endif %}

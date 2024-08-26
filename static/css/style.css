@@ -696,3 +696,8 @@ h5.profile {
 .read-page .product-info > p{
     font-size: 23px;
 }
+
+#follow-form {
+    top: -11px;
+    right: -8px;
+}
