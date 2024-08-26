@@ -13,7 +13,7 @@ class Product(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    photo = models.ImageField(upload_to="images/", blank=True) 
+    photo = models.ImageField(upload_to="images/", blank=True, default="images/product1.jpg") 
     cnt = models.IntegerField(default=0)
     uuid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="products")
 
