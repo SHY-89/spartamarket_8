@@ -27,7 +27,7 @@
             {% if request.user.is_authenticated %}
                 <div class="dropdown">
                     <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none;">
-                        <img src="{{ request.user.profile_picture.url }}" alt="프로필 사진" width=50 height=50 >
+                        <img src="{{ request.user.profile_picture.url }}" alt="프로필 사진" onerror="this.src='/media/images/default_user.png'" width=50 height=50 >
                         <img src="/media/images/eggplant_01.gif" alt="움직이는가지" height="50" style="margin-right:5px">
                     </a>
                     <ul class="dropdown-menu">
