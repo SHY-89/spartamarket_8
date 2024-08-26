@@ -1,4 +1,4 @@
-# 8조 냉장고
+# 8조 냉Django
 ## spartamarket Project
 
 ### 프로젝트 소개
