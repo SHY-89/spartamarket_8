@@ -60,6 +60,7 @@
 - Visual Studio Code
 
 ### ERD
-![Screenshot 2024-08-21 at 5 04 28 PM](https://github.com/user-attachments/assets/e2c0de33-07ec-461f-be3b-61e5021c030a)
+<img width="951" alt="Screenshot 2024-08-26 at 4 24 27 PM" src="https://github.com/user-attachments/assets/8ce8a321-e9ed-45d4-8d77-ee31d41e55e3">
+
 
 
