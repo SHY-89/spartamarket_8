@@ -12,7 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.all.min.js"></script>
     <script src="https://kit.fontawesome.com/8f954b3564.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=1.895">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=1.908">
 </head>
 
 <body>
@@ -23,14 +23,15 @@
     </nav>    
     <div class="container py-4 py-md-5 px-4 px-md-3 text-body-secondary" style="position: relative;">
         <div style="position: absolute;top: 77px;right: 5px;">
+
             {% if request.user.is_authenticated %}
                 <div class="dropdown">
                     <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none;">
                         <img src="{{ request.user.profile_picture.url }}" alt="프로필 사진" width=50 height=50 >
-                        <img src="/media/images/eggplant_01.gif" alt="움직이는가지" height="50">
+                        <img src="/media/images/eggplant_01.gif" alt="움직이는가지" height="50" style="margin-right:5px">
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">프로필</a></li>
+                        <li><a class="dropdown-item" href="{% url 'users:profile' request.user.username %}">프로필</a></li>
                         <li><a class="dropdown-item" href="{% url 'accounts:update' request.user.pk %}">회원 정보 수정</a></li>
                         <li><a class="dropdown-item" href="{% url 'accounts:change_password' %}">비밀번호 변경</a></li>
                         <li><hr class="dropdown-divider"></li>
@@ -43,7 +44,7 @@
                     </ul>
                     <form action="{% url 'accounts:logout' %}" method="POST" style="display: inline-block;vertical-align: middle;">
                         {% csrf_token %}
-                        <button type="submit" class="logout-delete-btn">로그아웃</button>
+                        <button type="submit" class="logout_button">로그아웃</button>
                     </form>
                 </div>
                 {% else %}
@@ -65,9 +66,16 @@
             <a class="btn create-btn" href="{% url 'products:create' %}" style="padding: 9px 20px;background-color: #560C7B;color: white;text-decoration: none;border-radius: 5px;border: 0;">등록하기</a>
             <br><br>
         </div>
+
     </div>
 
     <main class="container" style="padding: 0px">
+        <div class="" style="margin-bottom: 12px">
+            <select class="logout_button order_box" name="orders" id="orders" onchange="order_by()">
+                <option value="date" {% if request.GET.orders == 'date'%}selected{% endif %}>최신순</option>
+                <option value="popularity" {% if request.GET.orders == 'popularity'%}selected{% endif %}>인기순</option>
+            </select>
+        </div>
         {% block content %}
 
         {% endblock %}
@@ -85,7 +93,7 @@
         <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
             <li class="ms-3">
                 <a class="text-body-secondary" href="https://tjduwkrn.tistory.com/" style="text-decoration: none;" target="_blank">
-                    조장. 서영환
+                    조장. 갓영환
                 </a>
             </li>
             <li class="ms-3">
@@ -112,8 +120,29 @@
         }
     }
     function serchs(){
+        let serch_box = document.getElementById('serch_box');
         location.href = '{% url "index" %}?serch_text='+serch_box.value;
     }
+    function order_by(){
+        let serch_box = document.getElementById('serch_box');
+        let order_box = document.getElementById('orders');
+        location.href = '{% url "index" %}?serch_text='+serch_box.value+'&orders='+order_box.value;
+    }
 </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const path = window.location.href;
+        const isProfileOrSettingsPage = path.includes('profile') || path.includes('update') || path.includes('change_password');
+
+        if (isProfileOrSettingsPage) {
+            const orderDropdown = document.getElementById('orders');
+            if (orderDropdown) {
+                orderDropdown.style.display = 'none';
+            }
+        }
+    });
+</script>
+
 </body>
 </html>
