@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ProductForm, CommentForm
-from .models import Product, Comment
+from .models import Product, Comment, HashTag
 from django.views.decorators.http import require_http_methods,require_POST
 from django.db.models import Count, Q
 from django.http import JsonResponse
+import re
 
 
 
@@ -39,13 +40,21 @@ def create(request):
             products = forms.save(commit=False)
             products.uuid = request.user
             products.save()
+            hash_tags = request.POST.get("hashtag").replace(" ","").split(",")
+            for hash_name in hash_tags:
+                hash_name = re.sub('[-=+,#/\?:^.@*\"※~ㆍ!』‘|\(\)\[\]`\'…》\”\“\’·]', '', hash_name)
+                if hash_name == '': continue
+                if len(HashTag.objects.filter(name=hash_name)) == 0:
+                    HashTag.objects.create(name=hash_name)
+                
+                hashs = get_object_or_404(HashTag, name=hash_name)
+                products.hashtags.add(hashs.pk)
             return redirect("products:read", products.pk)
         
     else:
         forms = ProductForm()
         
-    context = { "forms" : forms
-        }
+    context = { "forms" : forms }
     return render(request, "products/create.html", context)
 
 
@@ -70,12 +79,28 @@ def update(request, pk):
             forms = ProductForm(request.POST, request.FILES, instance=product)
             if forms.is_valid():
                 forms.save()
+                hash_tags = request.POST.get("hashtag").replace(" ","").split(",")
+                for hash_name in hash_tags:
+                    hash_name = re.sub('[-=+,#/\?:^.@*\"※~ㆍ!』‘|\(\)\[\]`\'…》\”\“\’·]', '', hash_name)
+                    if hash_name == '': continue
+                    if len(HashTag.objects.filter(name=hash_name)) == 0:
+                        HashTag.objects.create(name=hash_name)
+                    
+                    hashs = get_object_or_404(HashTag, name=hash_name)
+                    if product.hashtags.filter(pk=hashs.pk).exists():
+                        product.hashtags.remove(hashs.pk)
+                    else:
+                        product.hashtags.add(hashs.pk)
             return redirect("products:read", pk)
     else:
+        hash_tag = ''
+        for tag in product.hashtags.all():
+            hash_tag += tag.name + ','
+        
         forms = ProductForm(instance=product)
     context = {
-        
-        'forms':forms
+        "hash_tag": hash_tag,
+        'forms': forms,
     }
     
     return render(request, "products/update.html", context)

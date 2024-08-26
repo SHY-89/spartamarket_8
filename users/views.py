@@ -35,5 +35,9 @@ def update_profile(request):
         if forms.is_valid():
             forms.save()
         return redirect("users:profile", username=request.user.username)
+<<<<<<< HEAD
     return redirect("accounts:login")
 
+=======
+    return redirect("accounts:login")
+>>>>>>> dev
