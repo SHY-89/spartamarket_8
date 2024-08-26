@@ -6,7 +6,7 @@ class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = "__all__"
-        exclude = ('uuid', 'like_users','cnt')
+        exclude = ("uuid", "like_users", "cnt", "hashtags", )
         labels = {
             "title": "제목",
             "content": "설명",

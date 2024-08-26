@@ -2,6 +2,12 @@ from django.db import models
 from django.conf import settings
 
 
+class HashTag(models.Model):
+    name = models.CharField(max_length=150, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
 class Product(models.Model):
     title = models.CharField(max_length=50)
     content = models.TextField()
@@ -13,6 +19,10 @@ class Product(models.Model):
 
     like_users = models.ManyToManyField(
         settings.AUTH_USER_MODEL, related_name="like_products"
+    )
+
+    hashtags = models.ManyToManyField(
+        HashTag, related_name="hash_products"
     )
 
     def __str__(self):
