@@ -90,12 +90,6 @@
     background-color: #C62828;
 }
 
-.btn_like {
-
-}
-
-
-
 
 .form-container {
     max-width: 800px;
@@ -107,6 +101,7 @@
     text-align: center;
     margin-top: 20px;
 }
+
 .profile {
     background-color: #fff;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
@@ -173,8 +168,6 @@ h5.profile {
 .profile_content form input[type="submit"] {
     font-weight: normal; /* 버튼의 기본 글씨 두께 */
 }
-
-
 
 
 
@@ -303,6 +296,7 @@ h5.profile {
     background-size: 300px 326px;
     height: 87%;
 }
+
 .product-image img {
     max-width: 100%;
     max-height: 250px; /* 이미지 높이 제한 */
