@@ -31,8 +31,5 @@ def follow(request, user_id):
 @require_POST
 def update_profile(request):
     if request.user.is_authenticated:
-        forms = UserProfile(request.POST, request.FILES, instance=request.user)
-        if forms.is_valid():
-            forms.save()
-        return redirect("users:profile", username=request.user.username)
-    return redirect("accounts:login")
+        forms = UserProfile(request.POST, request.FILES, instance=requ
+                            
