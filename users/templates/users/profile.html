@@ -3,43 +3,129 @@
 {% block content %}
 
 <div class="">
-    <h1 class="page-title">프로필</h1>
-    <div class="row mb-2">
-        <div class="col-md-5 form-container">
-            <img src="{{ member.profile_picture.url }}"> <br>
-            유저: {{ member.username }} <br>
-            가입일: {{ member.date_joined }} <br>
-
-            팔로우: {{ member.followings.count }} <br>
-            팔로워: {{ member.followers.count }}
-
-            {% if request.user != member %}
-                <form action="{% url 'users:follow' member.pk %}" method="POST">
-                    {% csrf_token %}
-                    {% if request.user in member.followers.all %}
-                        <input type="submit" value="언팔로우 하기">
-                    {% else %}
-                        <input type="submit" value="팔로우 하기">
+    <h5 class="form-container profile">Profile</h5>
+    <div class="mb-2">
+        <div class="form-container row profile"> 
+            <div class="col-md-4" style="position: relative;">
+                <img src="{{ member.profile_picture.url }}" style="width: 100px; height: 100px; border: 3px solid transparent; border-radius: 50%; background-image: linear-gradient(#fff, #fff), linear-gradient(to right, #560c7b 0%, #fe2aff 100%); background-origin: border-box; background-clip: content-box, border-box;">
+                {% if request.user == member %}
+                <i class="fa-solid fa-plus" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" style="position: absolute; border: 3px solid #fff; background: #b67cc1; bottom: 2px; left: 146px; padding: 5px 5px; border-radius: 100%; color: #fff; cursor: pointer;"></i>
+                {% endif %}
+            </div>
+            <div class="col-md-8" style="text-align: left;">
+                <div class="profile_content">
+                    <span class="label">이름</span> <span class="value">{{ member.username }}</span>
+                    {% if request.user != member %}
+                        <form action="{% url 'users:follow' member.pk %}" method="POST">
+                            {% csrf_token %}
+                            {% if request.user in member.followers.all %}
+                                <input type="submit" value="언팔로우 하기">
+                            {% else %}
+                                <input type="submit" value="팔로우 하기">
+                            {% endif %}
+                        </form>
                     {% endif %}
-                </form>
-            {% endif %}
+                </div>
+                <div class="profile_content">
+                    <span class="label">가입일</span> <span class="value">{{ member.date_joined }}</span>
+                </div>
+                <div class="profile_content">
+                    <span class="label">게시물</span> <span class="value">{{ member.products.all|length }}</span>
+                    <span class="label">팔로우</span> <span class="value">{{ member.followings.count }}</span>
+                    <span class="label">팔로워</span> <span class="value">{{ member.followers.count }}</span>
+                </div>
+                <div class="profile_content">
+                    <span class="label">이메일</span> <span class="value">{{ member.email }}</span>
+                </div>
+            </div> 
         </div>
-        <div class="col-md-5 form-container">
+
+        <ul class="nav nav-underline justify-content-center m-3">
+            {% if request.user == member %}
+            <li class="nav-item nav-item1" style="margin-left: -275px;">
+                <button class="btn btn-primary_like" onclick="mves_page('1')">내가 찜한 물건</button>
+            </li>
+            {% endif %}
+            <li class="nav-item nav-item2">
+                <button class="btn btn-primary_sale" onclick="mves_page('2')">판매 중인 물건</button>
+            </li>
+        </ul>
+
         {% if request.user == member %}
-        <h2>내가 찜한 물건들</h2>
-        <ul>
-            {% for product in member.like_products.all %}
-            <li><a href="{% url 'products:read' product.pk %}">{{ product.title }}</a></li>
-            {% endfor %}
-        </ul>
+        <div class="d-lg-none justify-content-center profile_page profile_page1">
+            <div class="row">
+                {% for product in member.like_products.all %}
+                    {% if product.photo %}
+                    <div class="col-md-3">
+                        <img src="{{ product.photo.url }}" alt="" onclick="location='{% url 'products:read' product.pk %}'" style="width: 80%; cursor: pointer;">
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
         {% endif %}
-        
-        <h2>올린 물건들</h2>
-        <ul>
-            {% for product in member.products.all %}
-            <li><a href="{% url 'products:read' product.pk %}">{{ product.title }}</a></li>
-            {% endfor %}
-        </ul>
+        <div class="d-lg-none justify-content-center profile_page profile_page2">
+            <div class="row">
+                {% for product in products %}
+                    {% if product.photo %}
+                    <div class="col-md-3">
+                        <img src="{{ product.photo.url }}" alt="" onclick="location='{% url 'products:read' product.pk %}'" style="width: 80%; cursor: pointer;">
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
     </div>
 </div>
+
+{% if request.user == member %}
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalCenterTitle">프로필 사진 변경</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'users:update_profile' %}" method="POST" enctype="multipart/form-data" id="modi_update">
+                    {% csrf_token %}
+                    <input type="file" name="profile_picture" id="modi_profile">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-primary" onclick="updates()">변경</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+
+<br>
+<script>
+    mves_page(2)
+
+    function mves_page(page){
+        $('.nav-item').removeClass("active");
+        $('.profile_page').removeClass("d-flex");
+        $('.profile_page').removeClass("d-lg-none");
+
+        if (page == '1'){
+            $('.nav-item'+page).addClass("active");
+            $('.profile_page'+page).addClass("d-flex");
+            $('.profile_page2').addClass("d-lg-none");
+        }else{
+            $('.nav-item'+page).addClass("active");
+            $('.profile_page'+page).addClass("d-flex");
+            $('.profile_page1').addClass("d-lg-none");
+        }
+    }
+    function updates(){
+        $('#modi_update').submit()
+    }
+</script>
+    
+
+
 {% endblock content %}
