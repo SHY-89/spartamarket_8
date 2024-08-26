@@ -60,7 +60,6 @@
 - Visual Studio Code
 
 ### ERD
-<img width="951" alt="Screenshot 2024-08-26 at 4 24 27 PM" src="https://github.com/user-attachments/assets/8ce8a321-e9ed-45d4-8d77-ee31d41e55e3">
-
+![spartamarket_8_ERD](https://github.com/user-attachments/assets/54af2678-598c-4cb4-8ea4-b2f31f117850)
 
 
