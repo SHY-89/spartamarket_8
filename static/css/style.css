@@ -50,6 +50,7 @@
     line-height: 1.6;
     margin-bottom: 10px;
 }
+
 .product-author { position: relative; bottom: -50px; font-size: 14px; color: #9C9E9E; margin-bottom: 10px; }
 
 .product-actions {
@@ -89,13 +90,6 @@
 .delete-form .btn-delete.btn-updates:hover {
     background-color: #C62828;
 }
-
-.btn_like {
-
-}
-
-
-
 
 .form-container {
     max-width: 800px;
@@ -287,7 +281,7 @@ h5.profile {
 
 .product-item {
     width: 300px;
-    height: 375px;
+    height: 450px;
     background-color: #fff;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
@@ -300,8 +294,8 @@ h5.profile {
     width: 100%;
     padding: 10px;
     background-size: cover;
-    background-size: 300px 326px;
-    height: 87%;
+    background-size: 300px 337px;
+    height: 75%;
 }
 .product-image img {
     max-width: 100%;
@@ -697,4 +691,8 @@ h5.profile {
     border : 0px;
     color: #ea2442;
     font-size: 26px;
+}
+
+.read-page .product-info > p{
+    font-size: 23px;
 }

@@ -11,8 +11,16 @@
     {% endif %}
     <div class="product-info">
         <h1>{{ product.title }}</h1>
-        <p>{{ product.content }}</p>
-        <a href="{% url 'users:profile' product.uuid.username %}"><p class="product-author">작성자: {{ product.uuid.username }} {{ product.created_at|date:"y.m.d" }}</p></a>
+        <p>{{ product.content|linebreaks }}</p>
+        <a href="{% url 'users:profile' product.uuid.username %}" style="text-decoration: none;">
+            <p style="margin-top: 50px;color: #9c9e9e;">작성자: <b>{{ product.uuid.username }}</b> {{ product.created_at|date:"y.m.d" }}</p>
+        </a>
+        <div class="hash_body">
+            해시태그 : 
+            {% for hash_name in product.hashtags.all %}
+                #<b>{{hash_name.name}}</b>&nbsp;
+            {% endfor %}
+        </div>
     </div>
     {% if product.uuid.pk == request.user.pk %}
     <div class="product-actions">

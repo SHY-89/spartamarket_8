@@ -12,6 +12,11 @@
         <div class="product-title">
             <a href="{% url 'products:read' product.pk %}">{{ product.title }}</a>
             <span style="float: right;">뷰{{ product.cnt }}</span>
+            <p style="text-align: left;">
+                {% for hash_name in product.hashtags.all %}
+                    #<b>{{hash_name.name}}</b>&nbsp;
+                {% endfor %}
+            </p>
         </div>
     </div>
     {% endfor %}
