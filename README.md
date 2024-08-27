@@ -60,11 +60,12 @@
 - Visual Studio Code
 
 ### ERD
-![Screenshot 2024-08-21 at 5 04 28 PM](https://github.com/user-attachments/assets/e2c0de33-07ec-461f-be3b-61e5021c030a)
+![spartamarket_8_ERD](https://github.com/user-attachments/assets/54af2678-598c-4cb4-8ea4-b2f31f117850)
+
 
 
 ### 와이프레임
-![와이어프레임](/냉Django_wireframe.jpg)
+![와이어프레임](/냉Django_wireframe.png)
 
 ### 역할 분담
 - 서영환
