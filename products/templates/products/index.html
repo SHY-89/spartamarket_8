@@ -3,7 +3,7 @@
 {% block content %}
 <div class="product-list">
     {% for product in index %}
-    <div class="product-item">
+    <div class="product-item" style="background-color:#F6F3FD">
         {% if product.photo %}
         <div class="product-image" style="background-image: url({{ product.photo.url }});" onclick="location='{% url 'products:read' product.pk %}'">
             
@@ -11,10 +11,11 @@
         {% endif %}
         <div class="product-title">
             <a href="{% url 'products:read' product.pk %}">{{ product.title }}</a>
-            <span style="float: right;">뷰{{ product.cnt }}</span>
-            <p style="text-align: left;">
+            <span style="float: right;">찜{{ product.like_users.all|length }}</span>
+            <span style="float: right;">뷰{{ product.cnt }}&nbsp;|&nbsp;</span>
+            <p style="text-align: left; margin-top:15px">
                 {% for hash_name in product.hashtags.all %}
-                    #<b>{{hash_name.name}}</b>&nbsp;
+                    #<b style="font-weight:400">{{hash_name.name}}</b>&nbsp;
                 {% endfor %}
             </p>
         </div>
