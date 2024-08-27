@@ -1,4 +1,4 @@
-# 8조 냉장고
+# 8조 냉Django
 ## spartamarket Project
 
 ### 프로젝트 소개
@@ -65,7 +65,7 @@
 
 
 ### 와이프레임
-![와이어프레임](/냉Django_wireframe.jpg)
+![와이어프레임](/냉Django_wireframe.png)
 
 ### 역할 분담
 - 서영환
