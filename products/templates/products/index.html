@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="" style="margin-bottom: 12px">
+    <select class="logout_button order_box" name="orders" id="orders" onchange="order_by()">
+        <option value="date" {% if request.GET.orders == 'date'%}selected{% endif %}>최신순</option>
+        <option value="popularity" {% if request.GET.orders == 'popularity'%}selected{% endif %}>인기순</option>
+    </select>
+</div>
 <div class="product-list">
     {% for product in index %}
     <div class="product-item" style="background-color:#F6F3FD">
