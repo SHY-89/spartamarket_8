@@ -11,7 +11,8 @@
         {% endif %}
         <div class="product-title">
             <a href="{% url 'products:read' product.pk %}">{{ product.title }}</a>
-            <span style="float: right;">뷰{{ product.cnt }}</span>
+            <span style="float: right;">찜{{ product.like_users.all|length }}</span>
+            <span style="float: right;">뷰{{ product.cnt }}&nbsp;|&nbsp;</span>
             <p style="text-align: left;">
                 {% for hash_name in product.hashtags.all %}
                     #<b>{{hash_name.name}}</b>&nbsp;
