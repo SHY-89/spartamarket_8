@@ -15,12 +15,12 @@ def index(request):
     
     if orders == 'date':
         if serch_text:
-            index = Product.objects.filter(Q(title__icontains=serch_text)|Q(content__icontains=serch_text)|Q(uuid__username__icontains=serch_text)|Q(hashtags__name__icontains=serch_text)).order_by("-pk")
+            index = Product.objects.filter(Q(title__icontains=serch_text)|Q(content__icontains=serch_text)|Q(uuid__username__icontains=serch_text)|Q(hashtags__name__icontains=serch_text)).distinct().order_by("-pk")
         else:
             index = Product.objects.all().order_by('-pk')
     else:
         if serch_text:
-            index = Product.objects.filter(Q(title__icontains=serch_text)|Q(content__icontains=serch_text)|Q(uuid__username__icontains=serch_text)|Q(hashtags__name__icontains=serch_text)).annotate(like_users_count=Count('like_users')).order_by('-like_users_count',"-pk")
+            index = Product.objects.filter(Q(title__icontains=serch_text)|Q(content__icontains=serch_text)|Q(uuid__username__icontains=serch_text)|Q(hashtags__name__icontains=serch_text)).distinct().annotate(like_users_count=Count('like_users')).order_by('-like_users_count',"-pk")
         else:
             index = Product.objects.all().annotate(like_users_count=Count('like_users')).order_by('-like_users_count', '-pk')
     
