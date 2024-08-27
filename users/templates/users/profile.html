@@ -53,7 +53,7 @@
 
         {% if request.user == member %}
         <div class="d-lg-none justify-content-center profile_page profile_page1">
-            <div class="row">
+            <div class="row" style="width: 100%;">
                 {% for product in member.like_products.all %}
                     {% if product.photo %}
                     <div class="col-md-3">
@@ -65,7 +65,7 @@
         </div>
         {% endif %}
         <div class="d-lg-none justify-content-center profile_page profile_page2">
-            <div class="row">
+            <div class="row" style="width: 100%;">
                 {% for product in products %}
                     {% if product.photo %}
                     <div class="col-md-3">

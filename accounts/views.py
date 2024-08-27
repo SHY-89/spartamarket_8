@@ -12,10 +12,6 @@ from .forms import CustomUserCreationForm, CustomAuthenticationForm, CustomUserC
 from django.contrib.auth.decorators import login_required
 
 
-def index(request):
-    return render(request, "index.html")
-
-
 @require_http_methods(["GET", "POST"])
 def signup(request):
     if request.method == "POST":
