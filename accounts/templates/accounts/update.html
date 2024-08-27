@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="form-container" style="width: 462px;">
+    <h1 class="page-title">회원 정보 변경</h1>
+    
+    <form action="{% url 'accounts:update' request.user.pk %}" method="POST" class="product-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">수정하기</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}

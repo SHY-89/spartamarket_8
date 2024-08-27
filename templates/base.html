@@ -1,0 +1,143 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>가지마켓</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/media/images/8team_icon.svg" />
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.all.min.js"></script>
+    <script src="https://kit.fontawesome.com/8f954b3564.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=1.913">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #560c7b !important;">
+        <div class="container container-fluid" style="font-size: 18px;color: #fff;padding: 1px 0;align-items: center;justify-content: center;">
+            <div class="auth-links">지금 가입하고, <b>가지</b> 받아가세요!</div>
+        </div>
+    </nav>    
+    <div class="container py-4 py-md-5 px-4 px-md-3 text-body-secondary" style="position: relative;">
+        <div style="position: absolute;top: 77px;right: 5px;">
+
+            {% if request.user.is_authenticated %}
+                <div class="dropdown">
+                    <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none;">
+                        <img src="{{ request.user.profile_picture.url }}" alt="프로필 사진" onerror="this.src='/media/images/default_user.png'" width=50 height=50 >
+                        <img src="/media/images/eggplant_01.gif" alt="움직이는가지" height="50" style="margin-right:5px">
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'users:profile' request.user.username %}">프로필</a></li>
+                        <li><a class="dropdown-item" href="{% url 'accounts:update' request.user.pk %}">회원 정보 수정</a></li>
+                        <li><a class="dropdown-item" href="{% url 'accounts:change_password' %}">비밀번호 변경</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" onclick="deletes()" style="border: 0;background: no-repeat;padding: 4px 16px; color:#000 !important; cursor: pointer;">회원탈퇴</a>
+                            <form class="dropdown user_delte" action="{% url 'accounts:delete' request.user.pk %}" method="POST">
+                                {% csrf_token %}
+                            </form>
+                        </li>
+                    </ul>
+                    <form action="{% url 'accounts:logout' %}" method="POST" style="display: inline-block;vertical-align: middle;">
+                        {% csrf_token %}
+                        <button type="submit" class="logout_button">로그아웃</button>
+                    </form>
+                </div>
+                {% else %}
+                <a href="{% url 'accounts:signup' %}" class = "login_button" style="margin-right: 15px;">회원가입</a>
+                <a href="{% url 'accounts:login' %}" class = "login_button">로그인</a>
+                
+                {% endif %}
+        </div>
+        <a class="navbar-brand" href="/">
+            <img src="/media/images/8_logo5.png" alt="Logo" width="180" class="d-inline-block align-text-top"/>
+            <span style="font-size: 30px; color: #570b7d; font-weight: bold; display: inline-block; vertical-align: top; padding: 33px 0 0 0px; margin-left: -13px;">마켓가지</span>
+        </a>
+        <div style="display: inline-flex; position: absolute; top: 80px; left: 383px;gap: 30px;">
+            <div style="position: relative;">
+                <input type="text" id="serch_box" style="width: 503px;height: 49px;text-align: justify;border-radius: 5px;padding-left: 10px;padding-right: 42px;" placeholder="검색어를 입력해주세요" onkeydown="enterkey()" value="{{ request.GET.serch_text }}">
+                <i class="fa-solid fa-magnifying-glass" style="position: absolute;right: 15px;top: 50%;transform: translateY(-50%);color: #560c7b;font-size: 23px;" aria-hidden="true" onclick="serchs()"></i>
+            </div>
+    
+            <a class="btn create-btn" href="{% url 'products:create' %}" style="padding: 9px 20px;background-color: #560C7B;color: white;text-decoration: none;border-radius: 5px;border: 0;">등록하기</a>
+            <br><br>
+        </div>
+
+    </div>
+
+    <main class="container" style="padding: 0px">
+   
+        {% block content %}
+
+        {% endblock %}
+    </main>
+
+    
+    <footer class="bg-body-tertiary p-3 mt-5">
+        <div class="container d-flex flex-wrap justify-content-between align-items-center py-3 my-4">
+        <div class="col-md-4 d-flex align-items-center">
+            <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+                <img src="/media/images/8team_icon.svg" alt="My Happy SVG" width="40" height="32" />
+            </a>
+            <span class="mb-3 mb-md-0 text-body-secondary">냉Django</span>
+        </div>
+        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+            <li class="ms-3">
+                <a class="text-body-secondary" href="https://tjduwkrn.tistory.com/" style="text-decoration: none;" target="_blank">
+                    조장. 갓영환
+                </a>
+            </li>
+            <li class="ms-3">
+                <a class="text-body-secondary" href="https://monsterroute.tistory.com/" style="text-decoration: none;" target="_blank">
+                    서기. 이새예
+                </a>
+            </li><li class="ms-3">
+                <a class="text-body-secondary" href="https://velog.io/@sptcnl/posts" style="text-decoration: none;" target="_blank">
+                    팀원. 김나희
+                </a>
+            </li>
+            <li class="ms-3">
+                <a class="text-body-secondary" href="https://velog.io/@nahyun_log/posts" style="text-decoration: none;" target="_blank">
+                    팀원. 김나현
+                </a>
+            </li>
+        </ul>
+        </div>
+    </footer>
+<script>
+    function enterkey() {
+        if (window.event.keyCode == 13) {
+            serchs()
+        }
+    }
+    function serchs(){
+        let serch_box = document.getElementById('serch_box');
+        location.href = '{% url "index" %}?serch_text='+serch_box.value;
+    }
+    function order_by(){
+        let serch_box = document.getElementById('serch_box');
+        let order_box = document.getElementById('orders');
+        location.href = '{% url "index" %}?serch_text='+serch_box.value+'&orders='+order_box.value;
+    }
+    function deletes() {
+        Swal.fire({
+            title: "회원탈퇴",
+            text: "정말로 회원탈퇴 하시겠습니까?",
+            showCancelButton: true,
+            confirmButtonColor: "#6B4EB1",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "회원 탈퇴"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $('.user_delte').submit()
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

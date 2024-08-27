@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="form-container">
+    <h1 class="page-title">글 수정하기</h1>
+    
+    <form action="" method="POST" enctype="multipart/form-data" class="product-form">
+        {% csrf_token %}
+        {{ forms.as_p }}
+        <p>
+            <label for="id_hashtag">해시태그:</label>
+            <input type="text" name="hashtag" placeholder=",로 구분하여 특수문자 없이 입력해주세요" maxlength="150" id="id_hashtag" value="{{ hash_tag }}">
+            <span class="help_text">
+                기존에 입력한 해시태그를 지우시려면 기존 내용을 입력하시면 해당 해시태그를 삭제 처리 됩니다.
+            </span>
+        </p>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">수정 완료</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}
