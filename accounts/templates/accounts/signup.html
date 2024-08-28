@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="form-container" style="width: 462px;">
+    <h1 class="page-title">회원가입</h1>
+    
+    <form action="{% url 'accounts:signup' %}" method="POST" class="product-form">
+        {% csrf_token %}
+            {{ form.username.label_tag }}
+            {{ form.username }}
+            <br>
+            <ul class="help-text" style="margin-top: 6px">
+                <li>{{ form.username.help_text }}</li>
+            </ul>
+            {{ form.first_name.label_tag }}
+            {{ form.first_name }}<br><br>
+            {{ form.last_name.label_tag }}
+            {{ form.last_name }}<br><br>
+            {{ form.email.label_tag }}
+            {{ form.email }}<br><br>
+            {{ form.password1.label_tag }}
+            {{ form.password1 }}<br>
+            <ul class="password-guidelines" style="margin-top: 6px">
+                <li>확다른 개인 정보와 유사한 비밀번호는 사용할 수 없습니다.</li>
+                <li>비밀번호는 최소 8자 이상이어야 합니다.</li>
+                <li>통상적으로 자주 사용되는 비밀번호는 사용할 수 없습니다.</li>
+                <li>숫자로만 이루어진 비밀번호는 사용할 수 없습니다.</li>
+            </ul>
+            {{ form.password2.label_tag }}
+            {{ form.password2 }}
+            <ul class="password-guidelines" style="margin-top: 6px">
+                <li>확인을 위해 이전과 동일한 비밀번호를 입력하세요.</li>
+            </ul>
+            <br>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">가입완료</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}

@@ -1,0 +1,705 @@
+
+.product-detail-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.product-image {
+    position: relative;
+    flex: 1;
+    max-width: 400px; /* 이미지 크기 최대 400px */
+}
+.back-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #560C7B; /* 포인트 컬러 */
+    color: white;
+    padding: 3px 8px; /* 버튼 크기 줄이기 */
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 12px; /* 버튼 글씨 크기 줄이기 */
+}
+.back-btn:hover {
+    background-color: #400960;
+}
+.product-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+}
+.product-info {
+    flex: 2;
+    position: relative; /* 버튼 위치를 위한 기준 설정 */
+    padding-bottom: 60px; /* 버튼 공간을 위한 여백 추가 */
+}
+.product-info h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #560C7B; /* 포인트 컬러 */
+    margin-bottom: 10px;
+}
+.product-info p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.product-author { position: relative; bottom: -50px; font-size: 14px; color: #9C9E9E; margin-bottom: 10px; }
+
+.product-actions {
+    position: absolute;
+    bottom: 20px; /* 하단 여백 */
+    right: 20px; /* 오른쪽 여백 */
+    display: flex;
+    gap: 50px; /* 버튼 간격 조정 */
+}
+.btn {
+    background-color: #560C7B; /* 포인트 컬러 */
+    color: white;
+    padding: 6px 15px; /* 버튼 크기 줄이기 */
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px; /* 버튼 글씨 크기 줄이기 */
+    text-align: center;
+}
+.edit-btn {
+    color: #570B7B;
+    background-color: #E6E6FA; 
+    margin: 5px;
+}
+
+.edit-btn:hover { background-color: #560C7B; color: #fff; }
+.delete-form .btn-delete.btn-updates {
+    background-color: #9C9E9E;
+    margin: 5px;
+    color: #fff;
+    padding: 6px 28px; /* 버튼 크기 */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px; /* 버튼 글씨 크기 */
+    text-align: center;
+}
+.delete-form .btn-delete.btn-updates:hover {
+    background-color: #C62828;
+}
+
+.form-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.profile {
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+h5.profile {
+    background-color: #fff;
+    box-shadow: none;
+    margin-top: -40px;
+    margin-bottom: -30px;
+    color: purple;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: left;
+}
+
+
+/* 찜한 물건, 올린 물건 텍스트 보라색으로 변경, 호버시 볼드체로, 밑줄은 삭제 */
+
+.nav-link {
+    color: rgb(158, 36, 158); 
+    text-decoration: none; 
+    font-weight: bold;
+}
+
+.nav-link.active {
+    color: rgb(100, 0, 100); 
+    font-weight: bold; 
+}
+
+.nav-link:hover {
+    color: rgb(221, 141, 241); 
+    font-weight: bold; 
+    text-decoration: none; 
+}
+
+/* 찜한 물건과 올린 물건 텍스트와 이미지 사이에 여백 추가 */
+.profile_page img {
+    margin-top: 70px; 
+}
+
+/* 프로필 제목과 정보 스타일링 */
+.profile_content {
+    margin-bottom: 2.5px; /* 각 항목 사이의 여백 추가 */
+}
+
+/* 프로필 항목 리스트 (이름, 가입일, 게시물, 팔로우, 팔로워, 이메일) */
+.profile_content span.label {
+    font-weight: 500;
+    color:#6a696b
+}
+
+/* 유저 정보 */
+.profile_content span.value {
+    font-weight: 550;
+    color: rgb(90, 17, 95);
+}
+
+/* 버튼 스타일 */
+.profile_content form input[type="submit"] {
+    font-weight: normal; /* 버튼의 기본 글씨 두께 */
+}
+
+
+
+.page-title {
+    color: #560C7B;
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.product-form {
+    font-size: 16px;
+    text-align: left;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #560C7B;
+    color: white;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #400960;
+}
+
+.btn-secondary {
+    background-color: #E6E6FA;
+    color: #560C7B;
+    border: none;
+}
+
+.btn-secondary:hover {
+    background-color: #D0C9F6;
+}
+
+.product-form input,
+.product-form select,
+.product-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* 파일 선택 버튼 스타일링 */
+.file-input-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.file-input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 100px; /* 크기를 크게 설정하여 클릭 가능 영역 확대 */
+    cursor: pointer;
+    opacity: 0; /* 파일 입력을 숨기고 */
+    z-index: 1; /* 버튼 위에 올리기 */
+}
+
+.file-input-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #560C7B;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.file-input-button:hover {
+    background-color: #400960;
+}
+
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+}
+
+.product-item {
+    width: 300px;
+    height: 450px;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+.product-image {
+    width: 100%;
+    padding: 10px;
+    background-size: cover;
+    background-size: 300px 337px;
+    height: 75%;
+}
+
+.product-image img {
+    max-width: 100%;
+    max-height: 250px; /* 이미지 높이 제한 */
+    width: auto;
+    height: auto;
+    object-fit: contain; /* 이미지가 안 잘리게 */
+    display: block;
+    margin: 0 auto; /* 이미지가 중앙 */
+}
+.product-title {
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #560C7B; /* 포인트 컬러 */
+}
+.product-title a {
+    color: inherit;
+    text-decoration: none;
+}
+.create-btn {
+    font-weight: 700;
+    color: #570b7b;
+    font-size: larger;
+    background-color: #fff;
+    padding: 5px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    border: 2px solid #570b7b;
+}
+.create-btn:hover {
+    background-color: #570b7b;
+    color: #fff;
+}
+
+/* 공통 스타일 */
+.signup-container, .update-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0px;
+}
+
+.signup-title {
+    color: #6a0dad;
+    font-size: 1.8em;
+    font-weight: bold; 
+    text-align: center; 
+    margin-bottom: 50px;
+}
+
+.auth-title {
+    color: #6a0dad; 
+    font-size: 1.5em; 
+    font-weight: bold; 
+    text-align: left;
+}
+
+.btn-custom {
+    background-color: #6a0dad; 
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    font-weight: bold;
+    margin-bottom: 100px; /* 버튼이랑 네브바 사이 여백 */
+}
+
+.btn-custom:hover {
+    background-color: #AC92ED; 
+}
+
+/* 네비게이션 바 아래 텍스트 */
+.welcome-message {
+    color: #6a0dad; 
+    font-weight: bold; 
+    margin-top: 20px; 
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+}
+
+.welcome-message img {
+    margin-left: 5px;
+    width: 65px; 
+}
+
+/* 로그아웃 및 회원탈퇴 버튼 */
+.logout-delete-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.logout-delete-btn {
+    background-color: #E6E6FA;
+    color: #6a0dad; 
+    border: 1px solid #6a0dad; 
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.logout_button {
+    background-color: #E6E6FA;
+    color: #6a0dad; 
+    border: 1px solid #6a0dad; 
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    cursor: pointer;
+    font-weight: bold;
+}
+#orders {
+    padding: 4px 6px;
+}
+
+.logout_button:hover {
+    background-color: #6a0dad; 
+    color: white; 
+}
+
+.logout-delete-btn:hover {
+    background-color: #A558E2; 
+    color: white; 
+}
+
+.auth-links a {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    margin-right: 20px; 
+    padding-right: 10px; 
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.auth-links a:hover {
+    color: #A78FE9;
+}
+
+
+.login_button {
+    color: #560c7b;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 17px;
+}
+
+.password-confirmation-message {
+    margin-bottom: 10px;
+    font-size: 0.9em;
+    color: #6a0dad;
+    text-align: center;
+}
+
+
+.read-page .product-detail-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.read-page .product-image {
+    position: relative;
+    flex: 1;
+    max-width: 400px; 
+}
+
+.read-page .back-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #560C7B; 
+    color: white;
+    padding: 3px 8px; 
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 12px; 
+}
+
+.read-page .back-btn:hover {
+    background-color: #400960;
+}
+
+.read-page .product-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.read-page .product-info {
+    flex: 2;
+    position: relative; 
+    padding-bottom: 60px; 
+}
+
+.read-page .product-info h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #560C7B; 
+    margin-bottom: 10px;
+}
+
+.read-page .product-info p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.read-page .product-author { 
+    position: relative; 
+    bottom: -50px; 
+    font-size: 14px; 
+    color: #9C9E9E; 
+    margin-bottom: 10px; }
+
+/*.product-author { font-size: 14px; color: #333; margin-bottom: 10px; }*/
+/*.product-date { font-size: 14px; color: #777; margin-bottom: 20px; }*/
+
+.read-page .product-actions {
+    position: absolute;
+    bottom: 20px; /* 하단 여백 */
+    right: 20px; /* 오른쪽 여백 */
+    display: flex;
+    gap: 50px; /* 버튼 간격 조정 */
+}
+
+.product_like {
+    position: absolute;
+    top: 10px; /* 상단 여백 */
+    right: 15px; /* 오른쪽 여백 */
+    display: flex;
+    gap: 50px; /* 버튼 간격 조정 */
+}
+
+.read-page .btn {
+    background-color: #560C7B; /* 포인트 컬러 */
+    color: white;
+    padding: 6px 15px; /* 버튼 크기 줄이기 */
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px; /* 버튼 글씨 크기 줄이기 */
+    text-align: center;
+}
+
+.read-page .edit-btn {
+    color: #570B7B;
+    background-color: #E6E6FA; /* 포인트 컬러 */
+    margin: 5px;
+}
+
+.read-page .edit-btn:hover {
+     background-color: #560C7B; 
+     color: #fff;
+}
+
+.read-page .delete-form .btn-delete {
+    background-color: #9C9E9E;
+    margin: 5px;
+    color: #fff;
+    padding: 6px 30px; /* 버튼 크기 줄이기 */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px; /* 버튼 글씨 크기 줄이기 */
+    text-align: center;
+}
+.read-page .delete-form:hover .btn-delete {
+    background-color: #C62828;
+}
+
+
+/* 댓글 섹션 */
+.comment-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.comment-form-container {
+    position: relative;
+    margin-top: 10px; /* 폼 버튼 간격 */
+    text-align: left
+}
+
+.custom-comment-textarea {
+    width: calc(100% - 45px); /* 버튼너비에 따른 텍스트 영역 너비 */
+    margin-right: 10px;
+}
+
+.logout-delete-btn {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 80px; /* 버튼 너비 */
+}
+
+/* 댓글 목록 왼쪽 정렬 */
+.comment-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.comment-list li {
+    text-align: left; /* 댓글 왼쪽 정렬 */
+    margin-bottom: 10px; /* 댓글 간격 */
+}
+
+/* 내가 찜한 물건 */
+.btn-primary_like {
+    background-color: #e7d8f1; 
+    color: rgb(84, 38, 110); 
+    border: none; 
+    border-radius: 5px; 
+    padding: 7px 9px;
+    cursor: pointer; 
+    font-size: 15px; 
+    transition: background-color 0.3s ease; 
+    margin-right: 400px;
+}
+
+.btn-primary_like:hover {
+    background-color: #65269c; 
+    color: #ffffff;
+}
+
+/* 판매중인 물건 */
+.btn-primary_sale {
+    background-color: #e7d8f1; 
+    color: rgb(84, 38, 110); 
+    border: none; 
+    border-radius: 5px; 
+    padding: 7px 9px;
+    cursor: pointer; 
+    font-size: 15px; 
+    transition: background-color 0.3s ease; 
+    margin-left: -407px;
+}
+
+.btn-primary_sale:hover {
+    background-color: #65269c; 
+    color: #ffffff;
+}
+
+
+/* 댓글 작성 버튼 */
+.logout-delete-btn {
+    position: absolute;
+    bottom: -3px; 
+    right: 78px; 
+    width: 55px; 
+    margin: -33px;
+}
+
+.comment-date {
+    color: #888; 
+    font-size: 0.9em; 
+}
+
+/* 삭제 버튼 */
+.custom-delete-btn {
+    background-color: #d9534f; 
+    color: white; 
+    border: none; 
+    border-radius: 4px; 
+    padding: 4px 8px; 
+    cursor: pointer; 
+    font-size: 12px; 
+    transition: background-color 0.3s ease; 
+}
+
+/* 삭제 버튼 호버 */
+.custom-delete-btn:hover {
+    background-color: #c9302c;
+}
+
+.heart_btn {
+    background: none;
+    border : 0px;
+    color: #ea2442;
+    font-size: 26px;
+}
+
+.read-page .product-info > p{
+    font-size: 23px;
+}
+
+#follow-form {
+    top: -11px;
+    right: -8px;
+}
+
+#photo-clear_id{ width: auto; }
