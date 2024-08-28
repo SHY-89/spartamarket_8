@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="" style="margin-bottom: 12px">
+    <select class="logout_button order_box" name="orders" id="orders" onchange="order_by()">
+        <option value="date" {% if request.GET.orders == 'date'%}selected{% endif %}>최신순</option>
+        <option value="popularity" {% if request.GET.orders == 'popularity'%}selected{% endif %}>인기순</option>
+    </select>
+</div>
 <div class="product-list">
     {% for product in index %}
     <div class="product-item" style="background-color:#F6F3FD">
@@ -11,8 +17,8 @@
         {% endif %}
         <div class="product-title">
             <a href="{% url 'products:read' product.pk %}">{{ product.title }}</a>
-            <span style="float: right;">찜{{ product.like_users.all|length }}</span>
-            <span style="float: right;">뷰{{ product.cnt }}&nbsp;|&nbsp;</span>
+            <span style="float: right;"><i class="fa-solid fa-heart"></i>&nbsp;{{ product.like_users.all|length }}</span>
+            <span style="float: right;"><i class="fa-solid fa-eye"></i>&nbsp;{{ product.cnt }}&nbsp;&nbsp;&nbsp;</span>
             <p style="text-align: left; margin-top:15px">
                 {% for hash_name in product.hashtags.all %}
                     #<b style="font-weight:400">{{hash_name.name}}</b>&nbsp;

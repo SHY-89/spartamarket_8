@@ -36,9 +36,9 @@
                         <li><a class="dropdown-item" href="{% url 'accounts:change_password' %}">비밀번호 변경</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
-                            <form class="dropdown" action="{% url 'accounts:delete' request.user.pk %}" method="POST">
+                            <a class="dropdown-item" onclick="deletes()" style="border: 0;background: no-repeat;padding: 4px 16px; color:#000 !important; cursor: pointer;">회원탈퇴</a>
+                            <form class="dropdown user_delte" action="{% url 'accounts:delete' request.user.pk %}" method="POST">
                                 {% csrf_token %}
-                                <button class="dropdown-item" type="submit" style="border: 0;background: no-repeat;padding: 4px 16px;">회원탈퇴</button>
                             </form>
                         </li>
                     </ul>
@@ -70,18 +70,11 @@
     </div>
 
     <main class="container" style="padding: 0px">
-        <div class="" style="margin-bottom: 12px">
-            <select class="logout_button order_box" name="orders" id="orders" onchange="order_by()">
-                <option value="date" {% if request.GET.orders == 'date'%}selected{% endif %}>최신순</option>
-                <option value="popularity" {% if request.GET.orders == 'popularity'%}selected{% endif %}>인기순</option>
-            </select>
-        </div>
         {% block content %}
 
         {% endblock %}
     </main>
 
-    
     <footer class="bg-body-tertiary p-3 mt-5">
         <div class="container d-flex flex-wrap justify-content-between align-items-center py-3 my-4">
         <div class="col-md-4 d-flex align-items-center">
@@ -128,20 +121,20 @@
         let order_box = document.getElementById('orders');
         location.href = '{% url "index" %}?serch_text='+serch_box.value+'&orders='+order_box.value;
     }
-</script>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const path = window.location.href;
-        const isProfileOrSettingsPage = path.includes('profile') || path.includes('update') || path.includes('change_password');
-
-        if (isProfileOrSettingsPage) {
-            const orderDropdown = document.getElementById('orders');
-            if (orderDropdown) {
-                orderDropdown.style.display = 'none';
+    function deletes() {
+        Swal.fire({
+            title: "회원탈퇴",
+            text: "정말로 회원탈퇴 하시겠습니까?",
+            showCancelButton: true,
+            confirmButtonColor: "#6B4EB1",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "회원 탈퇴"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $('.user_delte').submit()
             }
-        }
-    });
+        });
+    }
 </script>
 
 </body>
